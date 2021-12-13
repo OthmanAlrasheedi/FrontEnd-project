@@ -1,0 +1,21 @@
+.map {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(137, 199, 199);
+}
+
+.imgCouers {
+  width: 250px;
+}
+
+.discrptionCoures {
+  text-align: center;
+}
+.inputSearch {
+  justify-content: center;
+}
+.course {
+  width: 250px;
+  border: 1px solid;
+  height: 250px;
+}

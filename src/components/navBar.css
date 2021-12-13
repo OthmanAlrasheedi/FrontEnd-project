@@ -1,0 +1,21 @@
+.nav {
+  background-color: rgb(137, 199, 199);
+
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 10px;
+  border-radius: 10px;
+  padding: 1px;
+}
+
+ul {
+  background-color: rgb(137, 199, 199);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 10px;
+}
+li {
+  display: inline-block;
+  padding: 30px;
+}
