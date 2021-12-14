@@ -1,0 +1,45 @@
+* {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  padding: 0;
+  margin: 0;
+}
+.signup {
+  width: 50%;
+  height: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid rgb(12, 0, 0);
+  box-sizing: border-box;
+  gap: 10px;
+}
+
+.inputsign {
+  text-align: center;
+    width: 40%;
+  height: 40%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid;
+  box-sizing: border-box;
+  gap: 10px;
+  width: auto;
+}
+
+.but {
+  background-color: #81968e;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border-radius: 2px;
+  border: 50ox;
+  cursor: pointer;
+  width: 10%;
+  height: 10%;
+}
+
+but:hover {
+  opacity: 0.8;
+}

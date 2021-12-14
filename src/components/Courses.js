@@ -22,6 +22,7 @@ export default function Courses({ token }) {
       });
       setCourses(res.data);
     }
+    console.log(token);
   }, [token]);
 
   const changeNameVal = (e) => {
@@ -108,6 +109,7 @@ export default function Courses({ token }) {
           headers: { authorization: "Bearer " + token },
         }
       );
+
       console.log(result.data);
     } catch (error) {
       console.log(error.response.data);
@@ -116,40 +118,85 @@ export default function Courses({ token }) {
 
   return (
     <>
+      <div className="allinput">
+        <input
+          placeholder="اللغه"
+          onChange={(e) => {
+            changeNameVal(e);
+          }}
+        />{" "}
+        <input
+          placeholder="رابط الفيديو"
+          onChange={(e) => {
+            changeVedcVal(e);
+          }}
+        />
+        <input
+          placeholder="الصورة"
+          onChange={(e) => {
+            changeImgVal(e);
+          }}
+        />
+        <input
+          placeholder="وصف"
+          onChange={(e) => {
+            changediscrption(e);
+          }}
+        />
+        <button
+          onClick={() => {
+            addCourse();
+          }}
+        >
+          أضافة درس
+        </button>
+      </div>
+      {/* <h3>{token}</h3> */}
+      <div className="inputSearch">
+        <input
+          className="inputSea"
+          placeholder="بحث"
+          onChange={(e) => {
+            searchTarget(e);
+          }}
+        />
+        <button
+          onClick={() => {
+            search1();
+          }}
+        >
+          ابحث
+        </button>
+      </div>
       <div className="courses">
-        <div>
-          <input
-            className="inputSearch"
-            placeholder="بحث"
-            onChange={(e) => {
-              searchTarget(e);
-            }}
-          />
-          <button
-            onClick={() => {
-              search1();
-            }}
-          >
-            ابحث
-          </button>
-        </div>
-
         <div className="map">
           {Courses.map((element, i) => {
             return (
               <div className="course" key={element._id}>
                 {" "}
                 {/* <h1>{element.user.name}</h1> */}
-                <p>{element.name}</p>
-                <img className="imgCouers"
+                <p className="namecoures">{element.name}</p>
+                <hr></hr>
+                <img
+                  className="map"
                   onClick={() => {
                     GoTPoCoures(element._id);
                   }}
                   src={element.img}
                   alt="nooo img"
                 />
+                <hr></hr>
                 <p className="discrptionCoures">: {element.Description}</p>
-                <iframe
+                <hr></hr>
+                <button
+                  className="butremove"
+                  onClick={() => {
+                    deleteCoures(element._id, i);
+                  }}
+                >
+                  حذف
+                </button>
+                {/* <iframe
                   width="560"
                   height="315"
                   // src={element.vedio  }
@@ -158,57 +205,18 @@ export default function Courses({ token }) {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
                   className="video"
-                ></iframe>
+                ></iframe> */}
                 <BsFillHeartFill
                   className="HEART"
                   onClick={() => {
                     fav(element._id);
                   }}
                 />
-                <button
-                  onClick={() => {
-                    deleteCoures(element._id, i);
-                  }}
-                >
-                  delete
-                </button>
               </div>
             );
           })}
         </div>
       </div>
-      <input
-        placeholder="اللغه"
-        onChange={(e) => {
-          changeNameVal(e);
-        }}
-      />{" "}
-      <input
-        placeholder="رابط الفيديو"
-        onChange={(e) => {
-          changeVedcVal(e);
-        }}
-      />
-      <input
-        placeholder="الصورة"
-        onChange={(e) => {
-          changeImgVal(e);
-        }}
-      />
-      <input
-        placeholder="وصف"
-        onChange={(e) => {
-          changediscrption(e);
-        }}
-      />
-      <button
-        onClick={() => {
-          addCourse();
-        }}
-      >
-        أضافة درس
-      </button>
-      {/* <h3>{token}</h3> */}
     </>
   );
 }

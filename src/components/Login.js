@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import "./login.css"
+import "./login.css";
 
 export default function Login({ setToken }) {
   const [email, setEmail] = useState("");
@@ -22,33 +22,51 @@ export default function Login({ setToken }) {
         password: password,
       });
       setToken(response.data.token);
+      console.log(setToken);
       history.push("/Courses");
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <div className="signup">
-      <input
-        onChange={(e) => {
-          changeEmail(e);
-        }}
-        placeholder="enter your email"
-      />
-      <input
-        onChange={(e) => {
-          changePassword(e);
-        }}
-        type="password"
-        placeholder="enter your password"
-      />
-      <button
-        onClick={() => {
-          checkLogin();
-        }}
-      >
-        Login
-      </button>
+    <div>
+      <h1>تسجيل الدخول</h1>
+      <div className="signup">
+        <p>
+          {" "}
+          الايميل
+          <br />{" "}
+          <input
+            className="inputsign"
+            onChange={(e) => {
+              changeEmail(e);
+            }}
+            placeholder=" الايميل"
+          />
+        </p>
+        <br />
+        <p>
+          {" "}
+          الرمز
+          <br />
+          <input
+            className="inputsign"
+            onChange={(e) => {
+              changePassword(e);
+            }}
+            type="password"
+            placeholder=" الرمز"
+          />
+        </p>
+        <button
+          className="but"
+          onClick={() => {
+            checkLogin();
+          }}
+        >
+          Login
+        </button>
+      </div>
     </div>
   );
 }

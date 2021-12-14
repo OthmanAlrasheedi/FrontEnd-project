@@ -15,7 +15,7 @@ function App() {
   const [token, setToken] = useState("");
 
   return (
-    <div> 
+    <div>
       <Navbar token={token} setToken={setToken} />
       <Route
         exact
