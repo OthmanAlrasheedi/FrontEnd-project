@@ -7,18 +7,18 @@ export default function List({ token }) {
 
   useEffect(async () => {
     if (token) {
-      const res = await axios.get("hhttp://localhost:5000/gettaslk", {
+      const res = await axios.get("http://localhost:5000/gettaslk", {
         headers: { authorization: "Bearer " + token },
       });
       setList(res.data);
     }
     console.log(token);
-  }, [token]);
+  }, []);
 
-  const addName =  (e) => {
+  const addName = (e) => {
     setAddname(e.target.value);
   };
-  const Adddis =  (e) => {
+  const Adddis = (e) => {
     setAddisc(e.target.value);
   };
 
@@ -37,6 +37,7 @@ export default function List({ token }) {
       const copyarr = [...List];
       copyarr.push(res.data);
       setList(copyarr);
+      console.log(copyarr);
     } catch (error) {
       console.log("error");
     }

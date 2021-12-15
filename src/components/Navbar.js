@@ -7,7 +7,6 @@ export default function Navbar({ token, setToken }) {
   return (
     <div className="nav">
       {token ? (
-          
         <ul>
           <li>
             <Link className="link" to="/Courses">

@@ -16,15 +16,13 @@ export default function Courses({ token }) {
   const [search, setsearch] = useState("");
 
   useEffect(async () => {
-    if (token) {
-      const res = await axios.get("http://localhost:5000/getCoures", {
-        headers: { authorization: "Bearer " + token },
-      });
-      setCourses(res.data);
-    }
-    console.log(token);
-  }, [token]);
+    const res = await axios.get("http://localhost:5000/getCoures", {
+      headers: { authorization: "Bearer " + token },
+    });
+    setCourses(res.data);
 
+    console.log(token);
+  }, []);
   const changeNameVal = (e) => {
     setName(e.target.value);
   };
@@ -59,7 +57,7 @@ export default function Courses({ token }) {
         }
       );
       console.log(result.data);
-      setCourses([...Courses, result.data]);
+        // setCourses([...Courses, result.data]);
       const copied = [...Courses];
       copied.push(result.data);
       setCourses(copied);
