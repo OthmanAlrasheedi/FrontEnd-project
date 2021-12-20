@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import "./sigup.css";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -39,32 +40,41 @@ export default function SignUp() {
     }
   };
   return (
-    <div className="signup">
+    <div className="Signup">
+
+      <h1 className="h1">التسجيل</h1>
       <input
+        className="csssignup"
         onChange={(e) => {
           changeName(e);
         }}
-        placeholder="enter your name"
+        placeholder="ادخل الاسم "
       />
+      <br></br>
       <input
+        className="csssignup"
         onChange={(e) => {
           changeEmail(e);
         }}
-        placeholder="enter your email"
+        placeholder="ادخل الايميل"
       />
+      <br></br>
       <input
+        className="csssignup"
         onChange={(e) => {
           changePassword(e);
         }}
         type="password"
-        placeholder="enter your password"
+        placeholder="ادخل الرمز"
       />
+      <br></br>
       <button
+        className="button"
         onClick={() => {
           addUser();
         }}
       >
-        sign up
+        تسجيل
       </button>
     </div>
   );

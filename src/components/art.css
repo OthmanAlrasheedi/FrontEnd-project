@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.artiback {
+  border: 1px solid;
+  height: 50px;
+  text-align: center;
+  gap: 10px;
+}

@@ -1,7 +1,8 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+
 import "./navBar.css";
-export default function Navbar({ token, setToken }) {
+export default function NavBar1({ token, setToken }) {
   const history = useHistory();
 
   return (
@@ -10,7 +11,7 @@ export default function Navbar({ token, setToken }) {
         <ul>
           <li>
             <Link className="link" to="/Courses">
-              الدروس
+              المواد
             </Link>
           </li>
           <li>

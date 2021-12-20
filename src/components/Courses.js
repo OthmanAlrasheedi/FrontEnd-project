@@ -57,7 +57,7 @@ export default function Courses({ token }) {
         }
       );
       console.log(result.data);
-        // setCourses([...Courses, result.data]);
+      // setCourses([...Courses, result.data]);
       const copied = [...Courses];
       copied.push(result.data);
       setCourses(copied);
@@ -167,7 +167,7 @@ export default function Courses({ token }) {
         </button>
       </div>
       <div className="courses">
-        <div className="map">
+        <div className="courses">
           {Courses.map((element, i) => {
             return (
               <div className="course" key={element._id}>

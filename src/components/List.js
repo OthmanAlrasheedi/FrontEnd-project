@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 export default function List({ token }) {
   const [List, setList] = useState([]);
   const [Addname, setAddname] = useState("");
   const [Addisc, setAddisc] = useState("");
-
+  const { id } = useParams();
   useEffect(async () => {
     if (token) {
-      const res = await axios.get("http://localhost:5000/gettaslk", {
+      const res = await axios.get(`http://localhost:5000/gettaslk/${id}`, {
         headers: { authorization: "Bearer " + token },
       });
       setList(res.data);

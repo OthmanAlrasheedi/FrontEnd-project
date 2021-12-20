@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./art.css";
 export default function Articles() {
   const [articals, setarticals] = useState([]);
 
@@ -10,7 +11,8 @@ export default function Articles() {
   return (
     <div>
       {articals.map((elem, i) => {
-        return <div>{elem.article}</div>;
+        console.log(elem);
+        return <div className="artiback">{elem.article}</div>;
       })}
     </div>
   );

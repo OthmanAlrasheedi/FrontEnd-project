@@ -1,0 +1,26 @@
+.Signup {
+  border: 2px white;
+  width: 400px;
+  height: 300px;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  gap: 10px;
+  margin: 100px auto;
+}
+
+.button {
+  height: 40px;
+  width: 50px;
+  border-radius: 10px;
+  background-color: grey;
+  margin-top: 30px;
+}
+.csssignup {
+  height: 30px;
+  width: 80%;
+}
+
+.h1 {
+  text-align: center;
+}

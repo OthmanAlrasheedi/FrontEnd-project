@@ -30,11 +30,11 @@ export default function Login({ setToken }) {
   };
   return (
     <div>
-      <h1>تسجيل الدخول</h1>
       <div className="signup">
+        <h1>تسجيل الدخول</h1>
+
         <p>
           {" "}
-          الايميل
           <br />{" "}
           <input
             className="inputsign"
@@ -44,10 +44,9 @@ export default function Login({ setToken }) {
             placeholder=" الايميل"
           />
         </p>
-        <br />
+
         <p>
           {" "}
-          الرمز
           <br />
           <input
             className="inputsign"
@@ -64,7 +63,7 @@ export default function Login({ setToken }) {
             checkLogin();
           }}
         >
-          Login
+          دخول
         </button>
       </div>
     </div>
