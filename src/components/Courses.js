@@ -82,16 +82,16 @@ export default function Courses({ token }) {
     }
   };
 
-  const search1 = () => {
-    const search1 = Courses.filter((element) => {
-      if (element.name.toLowerCase().includes(search.toLocaleLowerCase())) {
-        return element;
-      }
-      console.log(element);
-    });
-    setCourses(search1);
-    return search1;
-  };
+    const search1 = () => {
+      const search1 = Courses.filter((element) => {
+        if (element.name.toLowerCase().includes(search.toLocaleLowerCase())) {
+          return element;
+        }
+        console.log(element);
+      });
+      setCourses(search1);
+      return search1;
+    };
 
   const GoTPoCoures = (id) => {
     history.push(`/OneCouers/${id}`);
@@ -107,6 +107,10 @@ export default function Courses({ token }) {
           headers: { authorization: "Bearer " + token },
         }
       );
+      
+      if (result.status === 201) {
+        console.log(result);
+      }
 
       console.log(result.data);
     } catch (error) {
@@ -194,16 +198,8 @@ export default function Courses({ token }) {
                 >
                   حذف
                 </button>
-                {/* <iframe
-                  width="560"
-                  height="315"
-                  // src={element.vedio  }
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  className="video"
-                ></iframe> */}
+             
+               
                 <BsFillHeartFill
                   className="HEART"
                   onClick={() => {

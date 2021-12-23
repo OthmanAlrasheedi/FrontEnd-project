@@ -1,0 +1,7 @@
+.profile {
+  display: grid;
+  justify-content: center;
+  width: 400px;
+  position: absolute;
+  border: 1px solid black;
+}

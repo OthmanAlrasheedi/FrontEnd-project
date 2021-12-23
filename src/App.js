@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Courses from "./components/Courses";
 import Articles from "./components/Articles";
 import Login from "./components/Login";
@@ -11,8 +11,15 @@ import OneCouers from "./components/OneCouers";
 import { Route } from "react-router";
 
 function App() {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(() => {
+    const saved = localStorage.getItem("token");
+    const initialValue = JSON.parse(saved);
+    return initialValue || "";
+  });
 
+  useEffect(() => {
+    localStorage.setItem("token", JSON.stringify(token));
+  }, [token]);
   return (
     <div>
       <NavBar1 token={token} setToken={setToken} />

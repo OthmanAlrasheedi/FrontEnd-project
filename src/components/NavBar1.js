@@ -1,6 +1,13 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-
+// import {
+//   Navbar,
+//   Nav,
+//   NavDropdown,
+//   Form,
+//   FormControl,
+//   Button,
+// } from "react-bootstrap";
 import "./navBar.css";
 export default function NavBar1({ token, setToken }) {
   const history = useHistory();
@@ -11,7 +18,7 @@ export default function NavBar1({ token, setToken }) {
         <ul>
           <li>
             <Link className="link" to="/Courses">
-              المواد
+              الدروس
             </Link>
           </li>
           <li>
