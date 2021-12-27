@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { BsFillHeartFill } from "react-icons/bs";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import "./courses.css";
 import axios from "axios";
 
 export default function Courses({ token }) {
   const history = useHistory();
-
+  const { id } = useParams();
   const [Courses, setCourses] = useState([]);
   const [vedio, setvedio] = useState("");
   const [name, setName] = useState("");
   const [img, setImg] = useState("");
   const [Description, setDescription] = useState("");
+  const [update, setupdate] = useState(false);
 
   const [search, setsearch] = useState("");
 
@@ -82,16 +83,16 @@ export default function Courses({ token }) {
     }
   };
 
-    const search1 = () => {
-      const search1 = Courses.filter((element) => {
-        if (element.name.toLowerCase().includes(search.toLocaleLowerCase())) {
-          return element;
-        }
-        console.log(element);
-      });
-      setCourses(search1);
-      return search1;
-    };
+  const search1 = () => {
+    const search1 = Courses.filter((element) => {
+      if (element.name.toLowerCase().includes(search.toLocaleLowerCase())) {
+        return element;
+      }
+      console.log(element);
+    });
+    setCourses(search1);
+    return search1;
+  };
 
   const GoTPoCoures = (id) => {
     history.push(`/OneCouers/${id}`);
@@ -107,7 +108,7 @@ export default function Courses({ token }) {
           headers: { authorization: "Bearer " + token },
         }
       );
-      
+
       if (result.status === 201) {
         console.log(result);
       }
@@ -116,6 +117,10 @@ export default function Courses({ token }) {
     } catch (error) {
       console.log(error.response.data);
     }
+  };
+
+  const updat = () => {
+    setupdate(!update);
   };
 
   return (
@@ -153,7 +158,7 @@ export default function Courses({ token }) {
           أضافة درس
         </button>
       </div>
-      {/* <h3>{token}</h3> */}
+
       <div className="inputSearch">
         <input
           className="inputSea"
@@ -176,7 +181,6 @@ export default function Courses({ token }) {
             return (
               <div className="course" key={element._id}>
                 {" "}
-                {/* <h1>{element.user.name}</h1> */}
                 <p className="namecoures">{element.name}</p>
                 <hr></hr>
                 <img
@@ -198,8 +202,6 @@ export default function Courses({ token }) {
                 >
                   حذف
                 </button>
-             
-               
                 <BsFillHeartFill
                   className="HEART"
                   onClick={() => {

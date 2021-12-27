@@ -116,7 +116,7 @@ export default function Profile({ token }) {
             updat();
           }}
         >
-          تحديث{" "}
+          للتحديث اضغط هنا{" "}
         </button>
         {updpro ? alldata : ""}
       </div>

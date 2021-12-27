@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .nav {
   background-color: rgb(0, 10, 10);
   width: 100%;

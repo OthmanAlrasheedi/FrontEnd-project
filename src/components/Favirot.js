@@ -34,7 +34,6 @@ export default function Favirot({ token }) {
         return (
           <div>
             {" "}
-            {/* <h1>{element.user.name}</h1> */}
             <p className="namecoures">{elem.name}</p>
             <hr></hr>
             <img src={elem.img} alt="nooo img" />
