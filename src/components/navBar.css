@@ -26,8 +26,16 @@ li {
 }
 .link {
   color: beige;
+  text-decoration: none;
+  width: 500px;
+  height: 100px;
 }
 .linkpro {
   left: left;
   color: beige;
+}
+.navbarleft {
+}
+.navbarright {
+  height: 50px;
 }

@@ -8,6 +8,7 @@ import NavBar1 from "./components/NavBar1";
 import Profile from "./components/Profile";
 import Favirot from "./components/Favirot";
 import OneCouers from "./components/OneCouers";
+import Addcouers from "./components/Adddcouers";
 import { Route } from "react-router";
 
 function App() {
@@ -38,6 +39,13 @@ function App() {
         }}
       />
       <Route exact path="/signUp" component={SignUp} />
+      <Route
+        exact
+        path="/addcouers"
+        render={() => {
+          return <Addcouers token={token}  />;
+        }}
+      />
       <Route
         exact
         path="/OneCouers/:id"

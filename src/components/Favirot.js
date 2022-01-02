@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BsFillHeartFill } from "react-icons/bs";
+import "./Favirot.css";
 
 export default function Favirot({ token }) {
   const [Like, setLike] = useState([]);
@@ -32,7 +33,7 @@ export default function Favirot({ token }) {
     <div>
       {Like.map((elem, i) => {
         return (
-          <div>
+          <div className="">
             {" "}
             <p className="namecoures">{elem.name}</p>
             <hr></hr>

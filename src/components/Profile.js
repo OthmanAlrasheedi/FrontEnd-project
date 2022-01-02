@@ -62,36 +62,38 @@ export default function Profile({ token }) {
     setupdpro(!updpro);
   };
   const alldata = (
-    <div>
-      <input
-        onChange={(e) => {
-          cahngename(e);
-        }}
-        type="text"
-        placeholder="الاسم"
-      />
-      <input
-        onChange={(e) => {
-          cahngepass(e);
-        }}
-        type="password"
-        placeholder="الرمز"
-      />
-      <input
-        onChange={(e) => {
-          cahngeimg(e);
-        }}
-        type="text"
-        placeholder="الصوره"
-      />
-      <button
-        onClick={() => {
-          update();
-        }}
-      >
-        {" "}
-        حدث
-      </button>
+    <div className="alldat">
+      <div className="inupdate">
+        <input
+          onChange={(e) => {
+            cahngename(e);
+          }}
+          type="text"
+          placeholder="الاسم"
+        />
+        <input
+          onChange={(e) => {
+            cahngepass(e);
+          }}
+          type="password"
+          placeholder="الرمز"
+        />
+        <input
+          onChange={(e) => {
+            cahngeimg(e);
+          }}
+          type="text"
+          placeholder="الصوره"
+        />
+        <button
+          onClick={() => {
+            update();
+          }}
+        >
+          {" "}
+          حدث
+        </button>
+      </div>
     </div>
   );
   return (

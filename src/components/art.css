@@ -3,8 +3,16 @@
   padding: 0;
 }
 .artiback {
-  border: 1px solid;
-  height: 50px;
+  margin-top: 60px;
+  /* position: 30px; */
+  padding: 50px;
+  border: 1px solid black;
+  border-radius: 15px;
+  width: 650px;
+  height: 250px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(1, 600px);
   text-align: center;
-  gap: 10px;
+  background-color: rgba(95, 158, 160, 0.151);
 }

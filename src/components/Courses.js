@@ -11,8 +11,8 @@ export default function Courses({ token }) {
   const [vedio, setvedio] = useState("");
   const [name, setName] = useState("");
   const [img, setImg] = useState("");
-  const [Description, setDescription] = useState("");
   const [update, setupdate] = useState(false);
+  const [like, setlike] = useState([]);
 
   const [search, setsearch] = useState("");
 
@@ -23,13 +23,15 @@ export default function Courses({ token }) {
     setCourses(res.data);
 
     console.log(token);
-  }, []);
-  const changeNameVal = (e) => {
-    setName(e.target.value);
-  };
-  const changeVedcVal = (e) => {
-    setvedio(e.target.value);
-  };
+    if (token) {
+      const res = await axios.get("http://localhost:5000/like", {
+        headers: { authorization: "Bearer " + token },
+      });
+      setlike(res.data);
+      console.log(res.data);
+    }
+  }, [like]);
+
   const changeImgVal = (e) => {
     setImg(e.target.value);
   };
@@ -37,35 +39,31 @@ export default function Courses({ token }) {
   const searchTarget = (e) => {
     setsearch(e.target.value);
   };
-  const changediscrption = (e) => {
-    setDescription(e.target.value);
-  };
+  // const addCourse = async () => {
+  //   console.log("Sss");
+  //   try {
+  //     const result = await axios.post(
+  //       "http://localhost:5000/addCoures",
+  //       {
+  //         name: name,
+  //         Description: Description,
+  //         img: img,
+  //         vedio: vedio,
+  //       },
 
-  const addCourse = async () => {
-    console.log("Sss");
-    try {
-      const result = await axios.post(
-        "http://localhost:5000/addCoures",
-        {
-          name: name,
-          Description: Description,
-          img: img,
-          vedio: vedio,
-        },
-
-        {
-          headers: { authorization: "Bearer " + token },
-        }
-      );
-      console.log(result.data);
-      // setCourses([...Courses, result.data]);
-      const copied = [...Courses];
-      copied.push(result.data);
-      setCourses(copied);
-    } catch (error) {
-      console.log("eroew");
-    }
-  };
+  //       {
+  //         headers: { authorization: "Bearer " + token },
+  //       }
+  //     );
+  //     console.log(result.data);
+  //     // setCourses([...Courses, result.data]);
+  //     const copied = [...Courses];
+  //     copied.push(result.data);
+  //     setCourses(copied);
+  //   } catch (error) {
+  //     console.log("eroew");
+  //   }
+  // };
 
   const deleteCoures = async (id, index) => {
     try {
@@ -83,17 +81,6 @@ export default function Courses({ token }) {
     }
   };
 
-  const search1 = () => {
-    const search1 = Courses.filter((element) => {
-      if (element.name.toLowerCase().includes(search.toLocaleLowerCase())) {
-        return element;
-      }
-      console.log(element);
-    });
-    setCourses(search1);
-    return search1;
-  };
-
   const GoTPoCoures = (id) => {
     history.push(`/OneCouers/${id}`);
     console.log();
@@ -108,15 +95,19 @@ export default function Courses({ token }) {
           headers: { authorization: "Bearer " + token },
         }
       );
-
-      if (result.status === 201) {
-        console.log(result);
-      }
+      setlike(result.data);
 
       console.log(result.data);
     } catch (error) {
       console.log(error.response.data);
     }
+  };
+  const removeLike = async (id) => {
+    const result = await axios.delete(`http://localhost:5000/unlike/${id}`, {
+      headers: { authorization: "Bearer " + token },
+    });
+    setlike(result.data);
+    console.log(result.data);
   };
 
   const updat = () => {
@@ -125,40 +116,11 @@ export default function Courses({ token }) {
 
   return (
     <>
-      <div className="allinput">
-        <input
-          placeholder="اللغه"
-          onChange={(e) => {
-            changeNameVal(e);
-          }}
-        />{" "}
-        <input
-          placeholder="رابط الفيديو"
-          onChange={(e) => {
-            changeVedcVal(e);
-          }}
-        />
-        <input
-          placeholder="الصورة"
-          onChange={(e) => {
-            changeImgVal(e);
-          }}
-        />
-        <input
-          placeholder="وصف"
-          onChange={(e) => {
-            changediscrption(e);
-          }}
-        />
-        <button
-          onClick={() => {
-            addCourse();
-          }}
-        >
-          أضافة درس
-        </button>
-      </div>
-
+      <h3 className="h2">تعلم البرمجه معنا مجاناً</h3>
+      <h4 className="h4">
+        نعمل يومياً على اضافة دروس جديده واضافة مقالات جديده وسنستمر في تقديم
+        الدورات الى ان نوفر لكم كل ما تحتاجوه في سوق العمل{" "}
+      </h4>
       <div className="inputSearch">
         <input
           className="inputSea"
@@ -167,17 +129,50 @@ export default function Courses({ token }) {
             searchTarget(e);
           }}
         />
-        <button
-          onClick={() => {
-            search1();
-          }}
-        >
-          ابحث
-        </button>
       </div>
       <div className="courses">
         <div className="courses">
-          {Courses.map((element, i) => {
+          {Courses.filter((elme) => {
+            if (search === "") {
+              return elme;
+            } else if (elme.name.toLowerCase().includes(search.toLowerCase())) {
+              return elme;
+            }
+          }).map((element, i) => {
+            for (let i = 0; i < like.length; i++) {
+              if (like[i]._id === element._id) {
+                return (
+                  <div className="course" key={element._id}>
+                    {" "}
+                    <p className="namecoures">{element.name}</p>
+                    <hr></hr>
+                    <img
+                      className="map"
+                      onClick={() => {
+                        GoTPoCoures(element._id);
+                      }}
+                      src={element.img}
+                      alt="nooo img"
+                    />
+                    <p className="discrptionCoures">: {element.Description}</p>
+                    <button
+                      className="butremove"
+                      onClick={() => {
+                        deleteCoures(element._id, i);
+                      }}
+                    >
+                      ❌{" "}
+                    </button>
+                    <BsFillHeartFill
+                      style={{ color: "red" }}
+                      onClick={() => {
+                        removeLike(element._id);
+                      }}
+                    />
+                  </div>
+                );
+              }
+            }
             return (
               <div className="course" key={element._id}>
                 {" "}
@@ -191,19 +186,17 @@ export default function Courses({ token }) {
                   src={element.img}
                   alt="nooo img"
                 />
-                <hr></hr>
                 <p className="discrptionCoures">: {element.Description}</p>
-                <hr></hr>
                 <button
                   className="butremove"
                   onClick={() => {
                     deleteCoures(element._id, i);
                   }}
                 >
-                  حذف
+                  ❌{" "}
                 </button>
                 <BsFillHeartFill
-                  className="HEART"
+                  sstyle={{ color: "gray" }}
                   onClick={() => {
                     fav(element._id);
                   }}
