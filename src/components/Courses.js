@@ -32,10 +32,6 @@ export default function Courses({ token }) {
     }
   }, [like]);
 
-  const changeImgVal = (e) => {
-    setImg(e.target.value);
-  };
-
   const searchTarget = (e) => {
     setsearch(e.target.value);
   };
@@ -129,6 +125,7 @@ export default function Courses({ token }) {
             searchTarget(e);
           }}
         />
+        🔍
       </div>
       <div className="courses">
         <div className="courses">
@@ -154,7 +151,9 @@ export default function Courses({ token }) {
                       src={element.img}
                       alt="nooo img"
                     />
-                    <p className="discrptionCoures">: {element.Description}</p>
+                    <p className="discrptionCoures"> {element.Description}</p>
+                    <br></br>
+                    <p className="abdaaldrs">ابدا الدرس الان</p>
                     <button
                       className="butremove"
                       onClick={() => {

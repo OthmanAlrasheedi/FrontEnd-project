@@ -1,17 +1,18 @@
 .divmap {
   border: none;
   color: white;
-  padding: 16px 32px;
+  padding: 10px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 2px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
-  background-color: white;
+  background-color: rgb(238 231 231);
   color: black;
-  border: 2px solid rgb(88, 85, 85);
+  border: 2px solid rgb(219, 209, 209);
+  box-shadow: 1px 10px 7px rgba(0, 0, 0, 0.404);
 }
 
 .div {
@@ -24,15 +25,86 @@
 }
 .frame {
   margin: auto;
-  width: 500px;
+  width: 850px;
   position: relative;
+  margin-top: 40px;
 }
 
-.delved {
-  margin: 5px;
-  width: 50px;
-  height: 20px;
-}
 .allname {
+  margin: auto;
+  width: 15%;
+  font-size: 90x;
+}
+
+.vedios {
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 2px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: rgb(238 231 231);
+  color: black;
+  border: 2px solid rgb(219, 209, 209);
+  box-shadow: 1px 10px 7px rgba(0, 0, 0, 0.404);
+  border-radius: 20px solid;
+}
+/*
+
+
+.comment {
+  text-align: center;
+  margin-left: 95%;
+  width: 30px;
+  display: inline-block;
+}
+.deletecomm {
+  margin: auto;
+  width: 2%;
   text-align: center;
 }
+.bigcomm {
+  border: 1px solid black;
+}
+.omgess {
+  border-radius: 20px;
+  width: 40px;
+margin-right: 200px; 
+}
+.comments {
+  width: 50%;
+  margin: auto;
+} */
+
+.comments {
+  width: 50%;
+  margin: auto;
+}
+
+.bigcomm {
+  display: flex;
+}
+
+.comment {
+  width: 65px
+}
+.omgess {
+  width: 60px;
+  height: 60px;
+  display: block;
+} 
+
+.commenter {
+  position: relative;
+  top: -50px;
+  left: 60px;
+}
+
+.comment-info {
+  width: 80%;
+}
+
+
+

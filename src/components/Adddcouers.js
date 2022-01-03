@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import "./addcouers.css";
+import "./Adddcouers.css";
 export default function Addcouers({ token }) {
   const [add, setadd] = useState([]);
   const [name, setName] = useState("");
   const [img, setImg] = useState("");
+  const [vedio, setvedio] = useState("");
+
   const [Description, setDescription] = useState("");
 
   const changeNameVal = (e) => {
@@ -12,7 +14,7 @@ export default function Addcouers({ token }) {
   };
   const changedeiVal = (e) => {
     setDescription(e.target.value);
-  };
+  };  
   const changeImgVal = (e) => {
     setImg(e.target.value);
   };
@@ -36,12 +38,15 @@ export default function Addcouers({ token }) {
       const copied = [...add];
       copied.push(result.data);
       setadd(copied);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
-    <div>
+    <div className="addcoures">
       <input
+        className=""
         type="text"
         placeholder="اسم الماده"
         onChange={(e) => {

@@ -6,6 +6,7 @@ export default function Profile({ token }) {
   const [name, setname] = useState("");
   const [img, setimg] = useState("");
   const [password, setpass] = useState("");
+  const [bio, setbio] = useState("");
   const [updpro, setupdpro] = useState(false);
 
   useEffect(async () => {
@@ -24,6 +25,9 @@ export default function Profile({ token }) {
   const cahngepass = (e) => {
     setpass(e.target.value);
   };
+  const cahngebio = (e) => {
+    setbio(e.target.value);
+  };
 
   const update = async () => {
     if (token) {
@@ -33,6 +37,7 @@ export default function Profile({ token }) {
           name: name,
           img: img,
           password: password,
+          bio: bio,
         },
         {
           headers: { authorization: "Bearer " + token },
@@ -63,6 +68,13 @@ export default function Profile({ token }) {
   };
   const alldata = (
     <div className="alldat">
+      <input
+        onChange={(e) => {
+          cahngebio(e);
+        }}
+        type="text"
+        placeholder="اضف معلومات اضافيه"
+      />
       <div className="inupdate">
         <input
           onChange={(e) => {
@@ -71,6 +83,7 @@ export default function Profile({ token }) {
           type="text"
           placeholder="الاسم"
         />
+        <br></br>
         <input
           onChange={(e) => {
             cahngepass(e);
@@ -78,6 +91,7 @@ export default function Profile({ token }) {
           type="password"
           placeholder="الرمز"
         />
+        <br></br>
         <input
           onChange={(e) => {
             cahngeimg(e);
@@ -85,12 +99,12 @@ export default function Profile({ token }) {
           type="text"
           placeholder="الصوره"
         />
+        <br></br>
         <button
           onClick={() => {
             update();
           }}
         >
-          {" "}
           حدث
         </button>
       </div>
@@ -99,13 +113,15 @@ export default function Profile({ token }) {
   return (
     <div>
       <div className="profile">
-        <img src={user.img} />
+        <img className="imgess" src={user.img} />
+        {user.bio}
         <br></br>
         {user.name}
         <br></br>
         {user.email}
 
         <button
+          className="delacount"
           onClick={() => {
             deletacount();
           }}
@@ -114,6 +130,7 @@ export default function Profile({ token }) {
           حذف الحساب
         </button>
         <button
+          className="update"
           onClick={() => {
             updat();
           }}

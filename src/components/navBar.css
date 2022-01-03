@@ -39,3 +39,12 @@ li {
 .navbarright {
   height: 50px;
 }
+.linkimg {
+  border-radius: 200px;
+  width: 400px;
+  height: 400px;
+}
+.imgesss {
+  width: 40px;
+  border-radius: 200px;
+}
