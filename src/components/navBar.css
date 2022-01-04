@@ -14,7 +14,7 @@
 }
 
 ul {
-  background-color: black;
+  background-color: rgb(10, 4, 4);
   display: flex;
   justify-content: space-between;
   flex-direction: row;

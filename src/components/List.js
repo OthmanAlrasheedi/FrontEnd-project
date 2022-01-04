@@ -70,7 +70,8 @@ export default function List({ token }) {
   return (
     <div>
       <div className="inputlist">
-         <input
+        <input
+          className="inputadd"
           onChange={(e) => {
             addName(e);
           }}
@@ -82,6 +83,7 @@ export default function List({ token }) {
             Adddis(e);
           }}
           type="text"
+          className="discr"
           placeholder="الشرح"
         />
         <button
@@ -93,14 +95,12 @@ export default function List({ token }) {
           اضف
         </button>
       </div>
-      <h2> تم درس {counter} من الدروس</h2>
+      <h2 className="donelearn"> تم درس {counter} من الدروس </h2>
       {List.map((elem, i) => {
         return (
           <div>
             <div>
               <ul className="Lists">
-                <h1> {elem.username}</h1>
-                <li> </li>
                 <li> {elem.name}</li>
                 <li>{elem.Description}</li>
               </ul>
@@ -109,8 +109,7 @@ export default function List({ token }) {
                   deltask(i);
                 }}
               >
-                {" "}
-                حذف
+                ❌
               </button>
             </div>
           </div>

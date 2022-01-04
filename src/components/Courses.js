@@ -153,14 +153,13 @@ export default function Courses({ token }) {
                     />
                     <p className="discrptionCoures"> {element.Description}</p>
                     <br></br>
-                    <p className="abdaaldrs">ابدا الدرس الان</p>
                     <button
                       className="butremove"
                       onClick={() => {
                         deleteCoures(element._id, i);
                       }}
                     >
-                      ❌{" "}
+                      ❌
                     </button>
                     <BsFillHeartFill
                       style={{ color: "red" }}

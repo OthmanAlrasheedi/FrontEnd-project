@@ -12,7 +12,7 @@
   border: 1px solid black;
   border-radius: 40px;
   padding: 10px;
-  background-color: rgba(95, 158, 160, 0.151);
+  background-color: rgb(209 224 224 / 15%);
   box-shadow: 1px 10px 7px rgba(0, 0, 0, 0.404);
 }
 
@@ -30,6 +30,7 @@
 }
 .imgess {
   border: 1px solid #03bfcb;
-  border-radius: 50%;
+  border-radius: 120px;
   padding: 7px;
+  width: 150px;
 }

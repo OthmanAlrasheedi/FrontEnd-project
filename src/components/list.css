@@ -1,10 +1,24 @@
 .Lists {
-  background-color: rgb(149, 156, 156);
+  background-color: rgb(70 74 74);
   margin: 0;
+  color: rgb(223, 221, 217);
 }
+
 .li {
   color: rgb(133, 62, 50);
-  background-color: black;
+  background-color: rgb(218, 205, 205);
+  margin: 0;
 }
+
 .inputlist {
+  border: 1px;
+  border-radius: 1px solid;
+}
+
+.inputadd {
+  margin: 10px;
+  border-radius: 20px solid rgb(119, 113, 113);
+}
+.donelearn {
+  text-align: center;
 }

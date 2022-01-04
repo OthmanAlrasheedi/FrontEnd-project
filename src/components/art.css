@@ -14,5 +14,5 @@
   display: grid;
   grid-template-columns: repeat(1, 600px);
   text-align: center;
-  background-color: rgba(95, 158, 160, 0.151);
+  background-color: rgb(209 224 224 / 15%);
 }

@@ -70,3 +70,7 @@ h1 {
 but:hover {
   opacity: 0.8;
 } */
+.tosignup {
+  margin: 20px;
+  border-radius: 20px solid rgb(59, 16, 158);
+}

@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BsFillHeartFill } from "react-icons/bs";
 import "./Favirot.css";
+import { useHistory, useParams } from "react-router-dom";
 
 export default function Favirot({ token }) {
+  const history = useHistory();
+  const { id } = useParams();
   const [Like, setLike] = useState([]);
   useEffect(async () => {
     try {
@@ -29,18 +32,31 @@ export default function Favirot({ token }) {
     setLike(copied);
   };
 
+  const GoTPoCoures = (id) => {
+    history.push(`/OneCouers/${id}`);
+    console.log();
+  };
+
   return (
-    <div>
+    <div className="fav">
       {Like.map((elem, i) => {
         return (
-          <div className="">
+          <div className="inpagefav">
             {" "}
             <p className="namecoures">{elem.name}</p>
             <hr></hr>
-            <img src={elem.img} alt="nooo img" />
+            <img
+              className="imgfav"
+              onClick={() => {
+                GoTPoCoures(elem._id);
+              }}
+              src={elem.img}
+              alt="nooo img"
+            />
             <hr></hr>
             <p className="discrptionCoures">: {elem.Description}</p>
             <BsFillHeartFill
+              className="likes"
               onClick={() => {
                 removeLike(elem._id, i);
               }}

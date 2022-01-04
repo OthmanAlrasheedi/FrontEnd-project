@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 import "./login.css";
 
@@ -27,6 +27,9 @@ export default function Login({ setToken }) {
     } catch (error) {
       console.log(error);
     }
+  };
+  const tosignup = () => {
+    history.push("signUp");
   };
   return (
     <div>
@@ -57,6 +60,14 @@ export default function Login({ setToken }) {
             placeholder=" الرمز"
           />
         </p>
+        <button
+          className="tosignup"
+          onClick={() => {
+            tosignup();
+          }}
+        >
+          للتسجيل اضغط هنا
+        </button>
         <button
           className="but"
           onClick={() => {
