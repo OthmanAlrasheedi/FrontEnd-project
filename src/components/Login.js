@@ -3,7 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import axios from "axios";
 import "./login.css";
 
-export default function Login({ setToken }) {
+export default function Login({ setToken, setadmin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // you can use variable instded of state in this  case
@@ -22,6 +22,7 @@ export default function Login({ setToken }) {
         password: password,
       });
       setToken(response.data.token);
+      setadmin(response.data.payload.admin);
       console.log(setToken);
       history.push("/Courses");
     } catch (error) {

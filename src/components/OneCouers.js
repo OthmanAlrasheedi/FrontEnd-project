@@ -7,9 +7,10 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import parse from "html-react-parser";
 
-export default function OneCouers({ token }) {
+export default function OneCouers({ token, admin }) {
   // بالبدايه الستيت قيمته تكون فاضيه
   const [allcouers, setallcouers] = useState(null);
+  const [user, setuser] = useState([]);
   const [img, setimg] = useState("");
   const [dis, setdis] = useState("");
   const [vedio, setvedio] = useState("");
@@ -32,6 +33,13 @@ export default function OneCouers({ token }) {
       }
     } catch (error) {
       console.log(error);
+    }
+    if (token) {
+      const res = await axios.get("http://localhost:5000/user", {
+        headers: { authorization: "Bearer " + token },
+      });
+      setuser(res.data);
+      console.log(res.data);
     }
   }, []);
 
@@ -183,39 +191,56 @@ export default function OneCouers({ token }) {
       </button>
     </div>
   );
-  console.log(alldata);
 
-  const allved = <div></div>;
+  const gotoquiz = (id) => {
+    history.push(`/Quiz/${id}`);
+    console.log(id);
+  };
+
   return (
     <>
       {/* هنا نتحقق اذا جت وموجوره اظهرها اذا ماجاء شيء طلع لي  شيئ فاضي */}
+
+      {user.admin == true ? "" : ""}
       {allcouers !== null ? (
         <div className="OneCoures">
           <div className="updatone">
-            <input
-              type="text"
-              placeholder="الفيديو"
-              onChange={(e) => {
-                changeved(e);
-              }}
-            />
-            <button
-              onClick={() => {
-                addVedio(id);
-              }}
-            >
-              {" "}
-              اضف فيديو{" "}
-            </button>
-
-            <button
-              onClick={() => {
-                updat();
-              }}
-            >
-              {" "}
-              للتحديث اضغط هنا
-            </button>
+            {" "}
+            {user.admin == true ? (
+              <input
+                type="text"
+                placeholder="الفيديو"
+                onChange={(e) => {
+                  changeved(e);
+                }}
+              />
+            ) : (
+              ""
+            )}
+            {user.admin == true ? (
+              <button
+                onClick={() => {
+                  addVedio(id);
+                }}
+              >
+                {" "}
+                اضف فيديو{" "}
+              </button>
+            ) : (
+              ""
+            )}
+            {user.admin == true ? (
+              <button
+                onClick={() => {
+                  updat();
+                }}
+              >
+                {" "}
+                للتحديث اضغط هنا
+              </button>
+            ) : (
+              ""
+            )}
           </div>
           {update ? alldata : ""}
           <br></br>
@@ -230,29 +255,43 @@ export default function OneCouers({ token }) {
               {allcouers.vedios.map((ele, i) => {
                 return (
                   <div className="divmap">
-                    <span>
-                      {" "}
-                      <button
-                        className="vedios"
-                        onClick={() => {
-                          gotolearn(ele);
-                        }}
-                      >
-                        {i + 1} الدرس{" "}
-                      </button>
-                      {/* <button
-                        className="vedios"
-                        onClick={() => {
-                          removeved(ele);
-                        }}
-                      >
+                    <button
+                      className="vedios"
+                      onClick={() => {
+                        gotolearn(ele);
+                      }}
+                    >
+                      {i + 1} الدرس{" "}
+                    </button>
+
+                    {user.admin == true ? (
+                      <span>
                         {" "}
-                        ❌{" "}
-                      </button> */}
-                    </span>
+                        <button
+                          className="vedios"
+                          onClick={() => {
+                            removeved(ele);
+                          }}
+                        >
+                          {" "}
+                          ❌{" "}
+                        </button>
+                      </span>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 );
               })}
+              <button
+                className="quiz"
+                onClick={() => {
+                  gotoquiz(id);
+                }}
+              >
+                {" "}
+                اختبر نفسك
+              </button>
             </div>
           </div>
           <div className="frame">

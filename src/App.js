@@ -9,9 +9,11 @@ import Profile from "./components/Profile";
 import Favirot from "./components/Favirot";
 import OneCouers from "./components/OneCouers";
 import Addcouers from "./components/Adddcouers";
+import Quiz from "./components/Quiz";
 import { Route } from "react-router";
 
 function App() {
+  const [admin, setadmin] = useState(false);
   const [token, setToken] = useState(() => {
     const saved = localStorage.getItem("token");
     const initialValue = JSON.parse(saved);
@@ -23,34 +25,43 @@ function App() {
   }, [token]);
   return (
     <div>
-      <NavBar1 token={token} setToken={setToken} />
+      <NavBar1 token={token} setToken={setToken} admin={admin} />
       <Route
         exact
         path="/Courses"
         render={() => {
-          return <Courses token={token} />;
+          return <Courses token={token} admin={admin} />;
         }}
       />
+
+      <Route
+        exact
+        path="/Quiz/:id"
+        render={() => {
+          return <Quiz token={token} />;
+        }}
+      />
+
       <Route
         exact
         path="/login"
         render={() => {
-          return <Login setToken={setToken} />;
+          return <Login setToken={setToken} setadmin={setadmin} />;
         }}
       />
-      <Route exact path="/signUp" component={SignUp} />
+      <Route exact path="/signUp" component={SignUp} admin={admin} />
       <Route
         exact
         path="/addcouers"
         render={() => {
-          return <Addcouers token={token}  />;
+          return <Addcouers token={token} admin={admin} />;
         }}
       />
       <Route
         exact
         path="/OneCouers/:id"
         render={() => {
-          return <OneCouers token={token} />;
+          return <OneCouers token={token} admin={admin} />;
         }}
       />
 
@@ -65,7 +76,7 @@ function App() {
         exact
         path="/Articles"
         render={() => {
-          return <Articles token={token} />;
+          return <Articles token={token} admin={admin} />;
         }}
       />
       <Route

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./art.css";
-export default function Articles({ token }) {
+export default function Articles({ token, admin }) {
   const [articals, setarticals] = useState([]);
+  const [user, setuser] = useState([]);
   const [artical, setartical] = useState("");
 
   useEffect(async () => {
@@ -15,6 +16,13 @@ export default function Articles({ token }) {
       } catch (error) {
         console.log("Eere");
       }
+    }
+    if (token) {
+      const res = await axios.get("http://localhost:5000/user", {
+        headers: { authorization: "Bearer " + token },
+      });
+      setuser(res.data);
+      console.log(res.data);
     }
   }, []);
 
@@ -51,21 +59,29 @@ export default function Articles({ token }) {
         console.log(elem);
         return <div className="artiback">{elem.article} </div>;
       })}
-      <button
-        onClick={() => {
-          addarty();
-        }}
-      >
-        {" "}
-        اضف مقال !
-      </button>
-      ;
-      <input
-        type="text"
-        onChange={(e) => {
-          arti(e);
-        }}
-      />
+      {user.admin == true ? (
+        <input
+          placeholder="اضف مقالك"
+          type="text"
+          onChange={(e) => {
+            arti(e);
+          }}
+        />
+      ) : (
+        ""
+      )}
+
+      {user.admin == true ? (
+        <button
+          onClick={() => {
+            addarty();
+          }}
+        >
+          اضف مقال
+        </button>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

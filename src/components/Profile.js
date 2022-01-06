@@ -114,9 +114,9 @@ export default function Profile({ token }) {
     <div>
       <div className="profile">
         <img className="imgess" src={user.img} />
-        {user.bio}
+        <h1> {user.name}</h1>
         <br></br>
-        {user.name}
+        {user.bio}
         <br></br>
         {user.email}
 

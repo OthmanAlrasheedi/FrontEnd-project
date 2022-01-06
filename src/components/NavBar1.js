@@ -2,17 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import "./navBar.css";
-export default function NavBar1({ token, setToken }) {
+export default function NavBar1({ token, setToken, admin }) {
   const history = useHistory();
+  const [user, setuser] = useState([]);
   const [img, setimg] = useState("");
 
   useEffect(async () => {
     const res = await axios.get("http://localhost:5000/user", {
       headers: { authorization: "Bearer " + token },
     });
-    setimg(res.data);
+    setuser(res.data);
     console.log(res.data);
-  }, []);
+  }, [token]);
   return (
     <div className="nav">
       {token ? (
@@ -40,20 +41,23 @@ export default function NavBar1({ token, setToken }) {
               </Link>
             </li>
             <li>
-              <Link className="link" to="/addcouers">
-                اضف درس{" "}
-              </Link>
+              {user.admin == true ? (
+                <Link className="link" to="/addcouers">
+                  اضف درس{" "}
+                </Link>
+              ) : (
+                ""
+              )}
             </li>
           </div>
-
           <div className="navbarleft">
             <li>
-              <Link className="link" to="/Profile">
-                {" "}
-                <img className="imgesss" src={img.img} />
-              </Link>
-            </li>
-            <li>
+              <li>
+                <Link className="link" to="/Profile">
+                  {" "}
+                  <img className="imgesss" src={img.img} />
+                </Link>
+              </li>
               <Link
                 className="link"
                 to="/login"

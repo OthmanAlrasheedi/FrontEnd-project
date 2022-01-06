@@ -35,6 +35,7 @@ li {
   color: beige;
 }
 .navbarleft {
+  margin-left: 30px;
 }
 .navbarright {
   height: 50px;
@@ -45,6 +46,7 @@ li {
   height: 400px;
 }
 .imgesss {
-  width: 40px;
+  width: 30px;
   border-radius: 200px;
+  margin-top: -100px;
 }

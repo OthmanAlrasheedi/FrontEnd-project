@@ -4,15 +4,14 @@ import { useHistory, useParams } from "react-router-dom";
 import "./courses.css";
 import axios from "axios";
 
-export default function Courses({ token }) {
+export default function Courses({ token, admin }) {
   const history = useHistory();
   const { id } = useParams();
   const [Courses, setCourses] = useState([]);
-  const [vedio, setvedio] = useState("");
-  const [name, setName] = useState("");
-  const [img, setImg] = useState("");
   const [update, setupdate] = useState(false);
   const [like, setlike] = useState([]);
+  const [user, setuser] = useState([]);
+  const [infon, setInfon] = useState(false)
 
   const [search, setsearch] = useState("");
 
@@ -20,17 +19,26 @@ export default function Courses({ token }) {
     const res = await axios.get("http://localhost:5000/getCoures", {
       headers: { authorization: "Bearer " + token },
     });
+    console.log(res.data , "courses");
     setCourses(res.data);
 
-    console.log(token);
+    if (token) {
+      const res = await axios.get("http://localhost:5000/user", {
+        headers: { authorization: "Bearer " + token },
+      });
+      setuser(res.data);
+    }
+  }, [token]);
+
+  useEffect( async() => {
     if (token) {
       const res = await axios.get("http://localhost:5000/like", {
         headers: { authorization: "Bearer " + token },
       });
       setlike(res.data);
-      console.log(res.data);
+      console.log(res.data , "likeArr");
     }
-  }, [like]);
+  }, [infon])
 
   const searchTarget = (e) => {
     setsearch(e.target.value);
@@ -61,7 +69,7 @@ export default function Courses({ token }) {
   //   }
   // };
 
-  const deleteCoures = async (id, index) => {
+  const deleteCoures = async (id, i) => {
     try {
       const deletedCourse = await axios.delete(
         `http://localhost:5000/deletcures/${id}`,
@@ -70,8 +78,9 @@ export default function Courses({ token }) {
         }
       );
       const copied = [...Courses];
-      copied.splice(index, 1);
+      copied.splice(i, 1);
       setCourses(copied);
+      console.log(copied);
     } catch (error) {
       console.log("erroe");
     }
@@ -91,9 +100,8 @@ export default function Courses({ token }) {
           headers: { authorization: "Bearer " + token },
         }
       );
-      setlike(result.data);
-
-      console.log(result.data);
+      // setlike(result.data.LikeCoures);
+      setInfon(!infon)
     } catch (error) {
       console.log(error.response.data);
     }
@@ -102,7 +110,8 @@ export default function Courses({ token }) {
     const result = await axios.delete(`http://localhost:5000/unlike/${id}`, {
       headers: { authorization: "Bearer " + token },
     });
-    setlike(result.data);
+    // setlike(result.data);
+    setInfon(!infon)
     console.log(result.data);
   };
 
@@ -153,14 +162,6 @@ export default function Courses({ token }) {
                     />
                     <p className="discrptionCoures"> {element.Description}</p>
                     <br></br>
-                    <button
-                      className="butremove"
-                      onClick={() => {
-                        deleteCoures(element._id, i);
-                      }}
-                    >
-                      ❌
-                    </button>
                     <BsFillHeartFill
                       style={{ color: "red" }}
                       onClick={() => {
@@ -185,14 +186,18 @@ export default function Courses({ token }) {
                   alt="nooo img"
                 />
                 <p className="discrptionCoures">: {element.Description}</p>
-                <button
-                  className="butremove"
-                  onClick={() => {
-                    deleteCoures(element._id, i);
-                  }}
-                >
-                  ❌{" "}
-                </button>
+                {user.admin == true ? (
+                  <button
+                    className="butremove"
+                    onClick={() => {
+                      deleteCoures(element._id, i);
+                    }}
+                  >
+                    ❌{" "}
+                  </button>
+                ) : (
+                  ""
+                )}
                 <BsFillHeartFill
                   sstyle={{ color: "gray" }}
                   onClick={() => {
