@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import "./list.css";
 export default function List({ token }) {
   const [List, setList] = useState([]);
+  const [user, setuser] = useState([]);
   const [Addname, setAddname] = useState("");
   const [Addisc, setAddisc] = useState("");
   const [counter, setcounter] = useState(0);
@@ -17,6 +18,14 @@ export default function List({ token }) {
     }
 
     console.log(token);
+
+    if (token) {
+      const res = await axios.get("http://localhost:5000/user", {
+        headers: { authorization: "Bearer " + token },
+      });
+      setuser(res.data);
+      console.log(res.data);
+    }
   }, []);
 
   const addName = (e) => {
@@ -95,7 +104,7 @@ export default function List({ token }) {
           اضف
         </button>
       </div>
-      <h2 className="donelearn"> تم درس {counter} من الدروس </h2>
+      <h2 className="donelearn"> تم تدوين {counter} من الملاحظات</h2>
       {List.map((elem, i) => {
         return (
           <div>

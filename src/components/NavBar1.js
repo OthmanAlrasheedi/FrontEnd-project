@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import "./navBar.css";
-export default function NavBar1({ token, setToken, admin }) {
+export default function NavBar1({ token, setToken, admin, userId }) {
   const history = useHistory();
   const [user, setuser] = useState([]);
   const [img, setimg] = useState("");
@@ -14,6 +14,7 @@ export default function NavBar1({ token, setToken, admin }) {
     setuser(res.data);
     console.log(res.data);
   }, [token]);
+
   return (
     <div className="nav">
       {token ? (
@@ -27,7 +28,7 @@ export default function NavBar1({ token, setToken, admin }) {
 
             <li>
               <Link className="link" to="/List">
-                الانجازات{" "}
+                الملاحظات{" "}
               </Link>
             </li>
             <li>

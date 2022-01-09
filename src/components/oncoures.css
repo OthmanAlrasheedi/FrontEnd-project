@@ -65,6 +65,24 @@
   box-shadow: 1px 10px 7px rgba(0, 0, 0, 0.404);
   border-radius: 20px solid;
 }
+
+.addinlist {
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 2px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: rgb(238 231 231);
+  color: black;
+  border: 2px solid rgb(219, 209, 209);
+  box-shadow: 1px 10px 7px rgba(0, 0, 0, 0.404);
+  border-radius: 20px solid;
+  margin-left: 800px;
+}
+
 /*
 
 

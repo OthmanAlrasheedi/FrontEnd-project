@@ -166,6 +166,21 @@ export default function OneCouers({ token, admin }) {
       console.log("Erroe");
     }
   };
+
+  // const deletecomment = async (comment) => {
+  //   try {
+  //     const result = await axios.put(
+  //       `http://localhost:5000/delcommen/${id}`,
+  //       { comment: comment,
+
+  //       },
+  //       { headers: { authorization: "Bearer " + token } }
+  //     );
+  //     console.log(result.data);
+  //     setallcouers({ ...allcouers, comment: result.data.comment });
+  //   } catch (err) {
+  //     console.log(err.res.data, "error");
+  //   }
   const alldata = (
     <div className="alldataonecoues">
       <input
@@ -197,6 +212,9 @@ export default function OneCouers({ token, admin }) {
     console.log(id);
   };
 
+  const addinlist = () => {
+    history.push(`/List`);
+  };
   return (
     <>
       {/* هنا نتحقق اذا جت وموجوره اظهرها اذا ماجاء شيء طلع لي  شيئ فاضي */}
@@ -306,6 +324,14 @@ export default function OneCouers({ token, admin }) {
               allowfullscreen
               className="video"
             ></iframe>
+            <button
+              className="addinlist"
+              onClick={() => {
+                addinlist();
+              }}
+            >
+              دون ملاحظاتك
+            </button>
 
             <br></br>
           </div>
@@ -326,7 +352,7 @@ export default function OneCouers({ token, admin }) {
                     <button
                       className="deletecomm"
                       onClick={() => {
-                        delcomm(ele._id, i);
+                        delcomm(ele.comment);
                       }}
                     >
                       ❌

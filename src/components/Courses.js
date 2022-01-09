@@ -11,7 +11,7 @@ export default function Courses({ token, admin }) {
   const [update, setupdate] = useState(false);
   const [like, setlike] = useState([]);
   const [user, setuser] = useState([]);
-  const [infon, setInfon] = useState(false)
+  const [infon, setInfon] = useState(false);
 
   const [search, setsearch] = useState("");
 
@@ -19,7 +19,7 @@ export default function Courses({ token, admin }) {
     const res = await axios.get("http://localhost:5000/getCoures", {
       headers: { authorization: "Bearer " + token },
     });
-    console.log(res.data , "courses");
+    console.log(res.data, "courses");
     setCourses(res.data);
 
     if (token) {
@@ -30,15 +30,15 @@ export default function Courses({ token, admin }) {
     }
   }, [token]);
 
-  useEffect( async() => {
+  useEffect(async () => {
     if (token) {
       const res = await axios.get("http://localhost:5000/like", {
         headers: { authorization: "Bearer " + token },
       });
       setlike(res.data);
-      console.log(res.data , "likeArr");
+      console.log(res.data, "likeArr");
     }
-  }, [infon])
+  }, [infon]);
 
   const searchTarget = (e) => {
     setsearch(e.target.value);
@@ -101,7 +101,7 @@ export default function Courses({ token, admin }) {
         }
       );
       // setlike(result.data.LikeCoures);
-      setInfon(!infon)
+      setInfon(!infon);
     } catch (error) {
       console.log(error.response.data);
     }
@@ -111,7 +111,7 @@ export default function Courses({ token, admin }) {
       headers: { authorization: "Bearer " + token },
     });
     // setlike(result.data);
-    setInfon(!infon)
+    setInfon(!infon);
     console.log(result.data);
   };
 
@@ -199,7 +199,7 @@ export default function Courses({ token, admin }) {
                   ""
                 )}
                 <BsFillHeartFill
-                  sstyle={{ color: "gray" }}
+                  style={{ color: "gray" }}
                   onClick={() => {
                     fav(element._id);
                   }}

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./quiz.css";
-
+// http رقوست axsios
 export default function Quiz({ token }) {
   const [quizs, setquizs] = useState([]);
   const [quis, setquis] = useState(0);
+  const [score, setscore] = useState(false);
 
   const { id } = useParams();
 
@@ -21,62 +22,83 @@ export default function Quiz({ token }) {
     }
   }, []);
 
-  const chekanwr1 = (ele) => {
-    if (ele == true) {
-    }
+  const radio1 = (e) => {
+    setscore(e.target.value);
+    console.log(e.target.value);
   };
-  const chekanwr2 = (ele) => {};
-  const chekanwr3 = (ele) => {};
-  const chekanwr4 = (ele) => {};
-
-  const answer = (ele) => {
-    setquis();
+  const radio2 = (e) => {
+    setscore(e.target.value);
+  };
+  const radio3 = (e) => {
+    setscore(e.target.value);
+  };
+  const radio4 = (e) => {
+    setscore(e.target.value);
+  };
+  const answer = (score) => {
+  
   };
   return (
     <div>
       {quizs.map((ele, i) => {
         console.log(ele, "eleeeeeeeee");
-        console.log(ele.q.Q);
+
         return (
-          <div className="quiz12">
-            <p>{ele.q.Q}</p>
+          <div className="quiz12" key={i}>
+            <h1>{ele.q.Q}</h1>
 
             <ol>
-              <li
-                onClick={() => {
-                  chekanwr1(ele);
-                }}
-              >
-                <input type="radio" id="s1" name="quiz" value="false" />
+              <li>
+                <input
+                  onChange={(e) => {
+                    radio1(e);
+                  }}
+                  type="radio"
+                  id="s1"
+                  name={`quiz${i}`}
+                  value={ele.s1.boolean}
+                />
                 {ele.s1.s1}
               </li>
-
-              <li
-                onClick={() => {
-                  chekanwr2(ele);
-                }}
-              >
-                <input type="radio" id="s2" name="quiz" value="true" />
+              <br />
+              <li>
+                <input
+                  onChange={(e) => {
+                    radio2(e);
+                  }}
+                  type="radio"
+                  id="s2"
+                  name={`quiz${i}`}
+                  value={ele.s2.boolean}
+                />
 
                 {ele.s2.s2}
               </li>
-
-              <li
-                onClick={() => {
-                  chekanwr3(ele);
-                }}
-              >
-                <input type="radio" id="s3" name="quiz" value="false" />
+              <br />
+              <li>
+                <input
+                  onChange={(e) => {
+                    radio3(e);
+                  }}
+                  type="radio"
+                  id="s3"
+                  name={`quiz${i}`}
+                  value={ele.s3.boolean}
+                />
 
                 {ele.s3.s3}
               </li>
-
-              <li
-                onClick={() => {
-                  chekanwr4(ele);
-                }}
-              >
-                <input type="radio" id="s4" name="quiz" value="false" />
+              <br />
+              <li>
+                <input
+                  onChange={(e) => {
+                    radio4(e);
+                  }}
+                  type="radio"
+                  id="s4"
+                  name={`quiz${i}`}
+                  value={ele.s4.boolean}
+                />
                 {ele.s4.s4}
               </li>
             </ol>
@@ -89,7 +111,7 @@ export default function Quiz({ token }) {
         }}
       >
         {" "}
-        اجب
+        ارسل
       </button>
     </div>
   );

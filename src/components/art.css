@@ -15,4 +15,5 @@
   grid-template-columns: repeat(1, 600px);
   text-align: center;
   background-color: rgb(209 224 224 / 15%);
+  user-select: none;
 }

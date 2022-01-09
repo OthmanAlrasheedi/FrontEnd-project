@@ -14,6 +14,7 @@ import { Route } from "react-router";
 
 function App() {
   const [admin, setadmin] = useState(false);
+  const [userId, setuserId] = useState(false);
   const [token, setToken] = useState(() => {
     const saved = localStorage.getItem("token");
     const initialValue = JSON.parse(saved);
@@ -46,7 +47,13 @@ function App() {
         exact
         path="/login"
         render={() => {
-          return <Login setToken={setToken} setadmin={setadmin} />;
+          return (
+            <Login
+              setToken={setToken}
+              setadmin={setadmin}
+              setuserId={setuserId}
+            />
+          );
         }}
       />
       <Route exact path="/signUp" component={SignUp} admin={admin} />
@@ -90,7 +97,7 @@ function App() {
         exact
         path="/List"
         render={() => {
-          return <List token={token} />;
+          return <List token={token} userId={userId} />;
         }}
       />
     </div>

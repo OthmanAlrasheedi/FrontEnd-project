@@ -19,4 +19,5 @@
   box-shadow: 1px 10px 7px rgba(0, 0, 0, 0.404);
   border-radius: 20px solid;
   margin: auto;
+  cursor: pointer;
 }
