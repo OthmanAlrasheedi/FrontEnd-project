@@ -6,7 +6,12 @@ import "./quiz.css";
 export default function Quiz({ token }) {
   const [quizs, setquizs] = useState([]);
   const [quis, setquis] = useState(0);
-  const [score, setscore] = useState(false);
+  const [score, setscore] = useState([]);
+  const [ane1, setane1] = useState("");
+  const [ane2, setane2] = useState("");
+  const [ane3, setane3] = useState("");
+  const [ane4, setane4] = useState("");
+  const [quiston, setquiston] = useState("");
 
   const { id } = useParams();
 
@@ -16,33 +21,66 @@ export default function Quiz({ token }) {
         headers: { authorization: "Bearer " + token },
       });
       setquizs(res.data.quiz);
-      console.log(res.data, "dataaaaaaaaaaaaa");
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   }, []);
 
-  const radio1 = (e) => {
-    setscore(e.target.value);
-    console.log(e.target.value);
+  const radio = (e, i) => {
+    const copy = [...score];
+    copy[i] = e.target.value;
+    setscore(copy);
   };
-  const radio2 = (e) => {
-    setscore(e.target.value);
-  };
-  const radio3 = (e) => {
-    setscore(e.target.value);
-  };
-  const radio4 = (e) => {
-    setscore(e.target.value);
-  };
-  const answer = (score) => {
-  
+
+  const answer = () => {
+    setquis(score);
+    alert(score);
   };
   return (
     <div>
+      {/* <input
+        onChange={(e) => {
+          quiston(e);
+        }}
+        type="text"
+      />
+      <input
+        onChange={(e) => {
+          radio1(e);
+        }}
+        type="radio"
+        id="s1"
+        name="quiz"
+        value={boolean}
+      />
+      <input
+        onChange={(e) => {
+          radio2(e);
+        }}
+        type="radio"
+        id="s2"
+        name="quiz"
+        value={boolean}
+      />
+      <input
+        onChange={(e) => {
+          radio3(e);
+        }}
+        type="radio"
+        id="s3"
+        name="quiz"
+        value={boolean}
+      />{" "}
+      <input
+        onChange={(e) => {
+          radio4(e);
+        }}
+        type="radio"
+        id="s4"
+        name="quiz"
+        value={boolean}
+      /> */}
       {quizs.map((ele, i) => {
-        console.log(ele, "eleeeeeeeee");
-
         return (
           <div className="quiz12" key={i}>
             <h1>{ele.q.Q}</h1>
@@ -51,7 +89,7 @@ export default function Quiz({ token }) {
               <li>
                 <input
                   onChange={(e) => {
-                    radio1(e);
+                    radio(e, i);
                   }}
                   type="radio"
                   id="s1"
@@ -64,7 +102,7 @@ export default function Quiz({ token }) {
               <li>
                 <input
                   onChange={(e) => {
-                    radio2(e);
+                    radio(e, i);
                   }}
                   type="radio"
                   id="s2"
@@ -78,7 +116,7 @@ export default function Quiz({ token }) {
               <li>
                 <input
                   onChange={(e) => {
-                    radio3(e);
+                    radio(e, i);
                   }}
                   type="radio"
                   id="s3"
@@ -92,7 +130,7 @@ export default function Quiz({ token }) {
               <li>
                 <input
                   onChange={(e) => {
-                    radio4(e);
+                    radio(e, i);
                   }}
                   type="radio"
                   id="s4"

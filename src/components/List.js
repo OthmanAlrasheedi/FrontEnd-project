@@ -93,7 +93,7 @@ export default function List({ token }) {
           }}
           type="text"
           className="discr"
-          placeholder="الشرح"
+          placeholder="الملاحظه"
         />
         <button
           onClick={() => {
