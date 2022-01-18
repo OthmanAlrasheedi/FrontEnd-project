@@ -2,12 +2,14 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./list.css";
-export default function List({ token }) {
+export default function List({ token, username }) {
   const [List, setList] = useState([]);
   const [user, setuser] = useState([]);
   const [Addname, setAddname] = useState("");
   const [Addisc, setAddisc] = useState("");
   const [counter, setcounter] = useState(0);
+  const { id } = useParams();
+
   useEffect(async () => {
     if (token) {
       const res = await axios.get(`http://localhost:5000/gettaslk`, {
@@ -58,12 +60,15 @@ export default function List({ token }) {
     console.log(token);
   };
 
-  const deltask = async (i) => {
+  const deltask = async (i, id) => {
     if (token) {
       try {
-        const res = await axios.delete("http://localhost:5000/deletetask", {
-          headers: { authorization: "Bearer " + token },
-        });
+        const res = await axios.delete(
+          `http://localhost:5000/deletetask/${id}`,
+          {
+            headers: { authorization: "Bearer " + token },
+          }
+        );
         const copied = [...List];
         console.log(copied);
         copied.splice(i, 1);
@@ -96,6 +101,7 @@ export default function List({ token }) {
           placeholder="الملاحظه"
         />
         <button
+          className=""
           onClick={() => {
             addCours();
           }}
@@ -104,18 +110,21 @@ export default function List({ token }) {
           اضف
         </button>
       </div>
-      <h2 className="donelearn"> تم تدوين {counter} من الملاحظات</h2>
+      <h2 className="donelearn">
+        {" "}
+        مرحبا {username} لقد دونت {counter} من الملاحظات
+      </h2>
       {List.map((elem, i) => {
         return (
           <div>
             <div>
               <ul className="Lists">
-                <li> {elem.name}</li>
-                <li>{elem.Description}</li>
+                <li className="lii"> {elem.name}</li>
+                <li className="lii">{elem.Description}</li>
               </ul>
               <button
                 onClick={() => {
-                  deltask(i);
+                  deltask(i, elem._id);
                 }}
               >
                 ❌

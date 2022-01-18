@@ -1,6 +1,7 @@
 .Signup {
-  border: 2px white;
+  border: 2px rgb(253, 247, 247);
   width: 400px;
+  border-radius: 6px;
   height: 300px;
   text-align: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -17,6 +18,8 @@
   margin-top: 30px;
 }
 .csssignup {
+  border-radius: 10px;
+  margin: 5px;
   height: 30px;
   width: 80%;
 }

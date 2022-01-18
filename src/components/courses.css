@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   background-image: url("");
+  
 }
 
 .courses {
@@ -38,8 +39,10 @@
   width: 50%;
 }
 .namecoures {
-  background-color: rgb(94 137 146);
-  text-align: center;
+  background-color: #03506f;
+    text-align: center;
+    color: white;
+
 }
 
 .butremove {
@@ -89,4 +92,18 @@
 }
 .abdaaldrs {
   text-align: center;
+}
+@media only screen and (max-width: 900px) {
+  .courses{
+      width: 1217px;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column; 
+      margin: 6px;
+
+  }
+  .inputSea{
+    margin-left: -76px;
+    width: 146px;
+}
 }

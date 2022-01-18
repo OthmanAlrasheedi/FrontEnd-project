@@ -19,16 +19,25 @@ h1 {
   text-align: center;
 }
 .but {
-  height: 40px;
-  width: 50px;
+  height: 30px;
+  width: 80%;
   border-radius: 10px;
-  background-color: grey;
-  margin-top: 30px;
+  background-color: #243e40;
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
 }
 
 .inputsign {
   height: 30px;
   width: 80%;
+  border-radius: 10px;
+  color: #00adbb;
+}
+
+.tosign {
+  text-decoration: none;
 }
 /* }/
 ?.signup {

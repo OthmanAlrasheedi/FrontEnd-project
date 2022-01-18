@@ -1,13 +1,32 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import ProgressBar from "./ProgressBar";
+
 import "./Adddcouers.css";
-export default function Addcouers({ token }) {
+export default function Addcouers({ token, admin }) {
   const [add, setadd] = useState([]);
   const [name, setName] = useState("");
-  const [img, setImg] = useState("");
+  const [img, setimg] = useState("");
   const [vedio, setvedio] = useState("");
 
   const [Description, setDescription] = useState("");
+  const [file, setFile] = useState(null);
+  const [error, setError] = useState(null);
+
+  const types = ["image/png", "image/jpeg"];
+
+  const handleChange = (e) => {
+    let selected = e.target.files[0];
+
+    if (selected && types.includes(selected.type)) {
+      setFile(selected);
+      setError("");
+    } else {
+      setFile(null);
+      setError("Please select an image file (png or jpg)");
+    }
+    setimg(e.target.value);
+  };
 
   const changeNameVal = (e) => {
     setName(e.target.value);
@@ -16,7 +35,7 @@ export default function Addcouers({ token }) {
     setDescription(e.target.value);
   };
   const changeImgVal = (e) => {
-    setImg(e.target.value);
+    setimg(e.target.value);
   };
 
   const Addcouers = async () => {
@@ -49,12 +68,14 @@ export default function Addcouers({ token }) {
         className=""
         type="text"
         placeholder="اسم الماده"
+        required
         onChange={(e) => {
           changeNameVal(e);
         }}
       />
       <br></br>
       <input
+        required
         type="text"
         placeholder="وصف "
         onChange={(e) => {
@@ -62,15 +83,18 @@ export default function Addcouers({ token }) {
         }}
       />
       <br></br>
-      <input
-        type="text"
-        placeholder="الصورة "
-        onChange={(e) => {
-          changeImgVal(e);
-        }}
-      />
+      <label>
+        <input type="file" onChange={handleChange} required />
+      </label>
+      <div className="output">
+        {error && <div className="error">{error}</div>}
+        {file && <div>{file.name}</div>}
+        {file && <ProgressBar file={file} setFile={setFile} setimg={setimg} />}
+      </div>
       <br />
       <button
+        className="butnadd"
+        required
         onClick={() => {
           Addcouers();
         }}

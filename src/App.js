@@ -15,18 +15,29 @@ import { Route } from "react-router";
 function App() {
   const [admin, setadmin] = useState(false);
   const [userId, setuserId] = useState(false);
+  const [username, setusername] = useState("");
   const [token, setToken] = useState(() => {
     const saved = localStorage.getItem("token");
-    const initialValue = JSON.parse(saved);
+    const saved11 = localStorage.getItem("username");
+
+    const initialValue = JSON.parse(saved, saved11);
     return initialValue || "";
   });
 
   useEffect(() => {
     localStorage.setItem("token", JSON.stringify(token));
+    localStorage.setItem("username", JSON.stringify(username));
   }, [token]);
   return (
     <div>
-      <NavBar1 token={token} setToken={setToken} admin={admin} />
+      <NavBar1
+        token={token}
+        setToken={setToken}
+        admin={admin}
+        username={username}
+        setusername={setusername}
+        setuserId={setuserId}
+      />
       <Route
         exact
         path="/Courses"
@@ -52,6 +63,7 @@ function App() {
               setToken={setToken}
               setadmin={setadmin}
               setuserId={setuserId}
+              setusername={setusername}
             />
           );
         }}
@@ -68,7 +80,7 @@ function App() {
         exact
         path="/OneCouers/:id"
         render={() => {
-          return <OneCouers token={token} admin={admin} />;
+          return <OneCouers token={token} admin={admin} userId={userId} />;
         }}
       />
 
@@ -97,7 +109,7 @@ function App() {
         exact
         path="/List"
         render={() => {
-          return <List token={token} userId={userId} />;
+          return <List token={token} username={username} />;
         }}
       />
     </div>

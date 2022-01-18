@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./profile.css";
+import ProgressBar from "./ProgressBar";
+
 export default function Profile({ token }) {
   const [user, setuser] = useState("");
   const [name, setname] = useState("");
@@ -8,20 +10,40 @@ export default function Profile({ token }) {
   const [password, setpass] = useState("");
   const [bio, setbio] = useState("");
   const [updpro, setupdpro] = useState(false);
+  const [file, setFile] = useState(null);
+  const [error, setError] = useState(null);
+
+  const types = ["image/png", "image/jpeg"];
+
+  const handleChange = (e) => {
+    let selected = e.target.files[0];
+
+    if (selected && types.includes(selected.type)) {
+      setFile(selected);
+      setError("");
+    } else {
+      setFile(null);
+      setError("Please select an image file (png or jpg)");
+    }
+    setimg(e.target.value);
+  };
 
   useEffect(async () => {
     const res = await axios.get("http://localhost:5000/user", {
       headers: { authorization: "Bearer " + token },
     });
     setuser(res.data);
+    setname(res.data.name);
+    setimg(res.data.img);
+    setpass(res.data.password);
     console.log(res.data);
   }, []);
   const cahngename = (e) => {
     setname(e.target.value);
   };
-  const cahngeimg = (e) => {
-    setimg(e.target.value);
-  };
+  // const cahngeimg = (e) => {
+  //   setimg(e.target.value);
+  // };
   const cahngepass = (e) => {
     setpass(e.target.value);
   };
@@ -82,6 +104,7 @@ export default function Profile({ token }) {
           }}
           type="text"
           placeholder="الاسم"
+          value={name}
         />
         <br></br>
         <input
@@ -90,15 +113,26 @@ export default function Profile({ token }) {
           }}
           type="password"
           placeholder="الرمز"
+          value={password}
         />
         <br></br>
-        <input
+        <label>
+          <input type="file" onChange={handleChange} />
+        </label>
+        <div className="output">
+          {error && <div className="error">{error}</div>}
+          {file && <div>{file.name}</div>}
+          {file && (
+            <ProgressBar file={file} setFile={setFile} setimg={setimg} />
+          )}
+        </div>
+        {/* <input
           onChange={(e) => {
             cahngeimg(e);
           }}
           type="text"
           placeholder="الصوره"
-        />
+        /> */}
         <br></br>
         <button
           onClick={() => {

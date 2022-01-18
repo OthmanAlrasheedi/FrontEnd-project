@@ -20,28 +20,26 @@ export default function SignUp() {
   };
 
   const addUser = async () => {
-    console.log({
-      name: name,
-      email: email,
-      password: password,
-    });
-    try {
-      const response = await axios.post("http://localhost:5000/signup", {
-        name: name,
-        email: email,
-        password: password,
-      });
-      console.log(response);
-      if (response.status === 201) {
-        history.push("/login");
+    if (name !== name.value || email !== email || password !== password.value) {
+      alert("الرجاء  اكمل التسجيل بشكل صحيح !");
+    } else {
+      try {
+        const response = await axios.post("http://localhost:5000/signup", {
+          name: name,
+          email: email,
+          password: password,
+        });
+        console.log(response);
+        if (response.status === 201) {
+          history.push("/login");
+        }
+      } catch (error) {
+        console.log("err");
       }
-    } catch (error) {
-      console.log("err");
     }
   };
   return (
     <div className="Signup">
-
       <h1 className="h1">التسجيل</h1>
       <input
         className="csssignup"

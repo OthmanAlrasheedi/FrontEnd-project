@@ -21,3 +21,9 @@
   margin: auto;
   cursor: pointer;
 }
+.addQuiz {
+  position: relative;
+  margin: auto;
+  width: 30%;
+  border: 1px solid black;
+}

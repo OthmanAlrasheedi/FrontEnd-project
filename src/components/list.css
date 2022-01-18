@@ -4,7 +4,7 @@
   color: rgb(223, 221, 217);
 }
 
-.li {
+.lii {
   color: rgb(133, 62, 50);
   background-color: rgb(218, 205, 205);
   margin: 0;
@@ -12,12 +12,12 @@
 
 .inputlist {
   border: 1px;
-  border-radius: 1px solid;
+  margin-left: 600px;
 }
 
 .inputadd {
   margin: 10px;
-  border-radius: 20px solid rgb(119, 113, 113);
+  border-radius: 1px solid rgb(69, 61, 61);
 }
 .donelearn {
   text-align: center;

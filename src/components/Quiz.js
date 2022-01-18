@@ -3,26 +3,42 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./quiz.css";
 // http رقوست axsios
-export default function Quiz({ token }) {
+export default function Quiz({ token, admin }) {
   const [quizs, setquizs] = useState([]);
   const [quis, setquis] = useState(0);
   const [score, setscore] = useState([]);
-  const [ane1, setane1] = useState("");
-  const [ane2, setane2] = useState("");
-  const [ane3, setane3] = useState("");
-  const [ane4, setane4] = useState("");
-  const [quiston, setquiston] = useState("");
+  const [read1, setread1] = useState("");
+  const [read2, setread2] = useState("");
+  const [read3, setread3] = useState("");
+  const [read4, setread4] = useState("");
+  const [bol, setbol] = useState(false);
+  const [bol1, setbol1] = useState(false);
+  const [bol2, setbol2] = useState(false);
+  const [bol3, setbol3] = useState(false);
+  const [user, setuser] = useState([]);
+  const [qiz, setquiz] = useState("");
+  const [massege, setmassege] = useState("");
+  const [toogel, settoogel] = useState(false);
 
   const { id } = useParams();
 
   useEffect(async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/gettset/${id}`, {
-        headers: { authorization: "Bearer " + token },
-      });
-      setquizs(res.data.quiz);
+      if (token) {
+        const res = await axios.get(`http://localhost:5000/gettset/${id}`, {
+          headers: { authorization: "Bearer " + token },
+        });
+        setquizs(res.data.quiz);
+      }
     } catch (error) {
       console.log(error);
+    }
+    if (token) {
+      const res = await axios.get("http://localhost:5000/user", {
+        headers: { authorization: "Bearer " + token },
+      });
+      setuser(res.data);
+      console.log(res.data);
     }
   }, []);
 
@@ -33,53 +49,216 @@ export default function Quiz({ token }) {
   };
 
   const answer = () => {
-    setquis(score);
-    alert(score);
+    setquis(0);
+    let count = 0;
+    for (let i = 0; i < score.length; i++) {
+      console.log(score[i]);
+
+      if (score[i] == "true" || score[i] === true) {
+        count++;
+      }
+    }
+    console.log(quis);
+    console.log(score);
+
+    setquis(count);
+    setmassege(count);
+  };
+
+  const quiz = (e) => {
+    setquiz(e.target.value);
+  };
+
+  const radio1 = (e) => {
+    setread1(e.target.value);
+  };
+  const radio2 = (e) => {
+    setread2(e.target.value);
+  };
+  const radio3 = (e) => {
+    setread3(e.target.value);
+  };
+  const radio4 = (e) => {
+    setread4(e.target.value);
+  };
+  const bool1 = (e) => {
+    setbol(e.target.value);
+    console.log(e.target.value);
+  };
+  const bool2 = (e) => {
+    setbol1(e.target.value);
+  };
+  const bool3 = (e) => {
+    setbol2(e.target.value);
+  };
+
+  const bool4 = (e) => {
+    setbol3(e.target.value);
+  };
+
+  const removequiz = async (ele, b) => {
+    console.log(id, ele);
+    const body = { quiz: ele };
+    console.log(body);
+    try {
+      const result = await axios.put(
+        `http://localhost:5000/deltset/${id}`,
+        {
+          quiz: body,
+        },
+        {
+          headers: { authorization: "Bearer " + token },
+        }
+      );
+      console.log(result.data, "Data");
+      // setquizs(result.data);
+    } catch (error) {
+      console.log(error, "hi!");
+    }
+  };
+
+  const AddQuiz = async () => {
+    if (token) {
+      console.log(token);
+      try {
+        const result = await axios.post(
+          `http://localhost:5000/addtset/${id}`,
+          {
+            quiz: {
+              q: { Q: qiz },
+              s1: { s1: read1, boolean: bol },
+              s2: { s2: read2, boolean: bol1 },
+              s3: { s3: read3, boolean: bol2 },
+              s4: { s4: read4, boolean: bol3 },
+            },
+          },
+          {
+            headers: { authorization: "Bearer " + token },
+          }
+        );
+
+        setquizs(result.data.quiz);
+        // console.log(copy);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  const addquizez = () => {
+    settoogel(!toogel);
   };
   return (
     <div>
-      {/* <input
-        onChange={(e) => {
-          quiston(e);
+      {user.userId == true ? "" : ""}
+      <h1>
+        حصلت على {quis} من {quizs.length}
+      </h1>
+      {toogel === true ? (
+        <>
+          {" "}
+          {user.admin === true ? (
+            <div className="addQuiz">
+              <input
+                onChange={(e) => {
+                  quiz(e);
+                }}
+                type="text"
+                placeholder="السؤال"
+              />
+              <br />
+              <select
+                onChange={(e) => {
+                  bool1(e);
+                }}
+                value={bol}
+              >
+                <option value={true}>true</option>
+                <option value={false}>false</option>
+              </select>
+              <input
+                onChange={(e) => {
+                  radio1(e);
+                }}
+                type="text"
+                placeholder="الجواب"
+              />
+              <br></br>
+              <select
+                onChange={(e) => {
+                  bool2(e);
+                }}
+                value={bol}
+              >
+                <option value={false}>false</option>
+                <option value={true}>true</option>
+              </select>
+              <input
+                onChange={(e) => {
+                  radio2(e);
+                }}
+                type="text"
+                placeholder="الجواب"
+              />
+              <br></br>
+              <select
+                onChange={(e) => {
+                  bool3(e);
+                }}
+                value={bol}
+              >
+                <option value={false}>false</option>
+                <option value={true}>true</option>
+              </select>
+              <input
+                onChange={(e) => {
+                  radio3(e);
+                }}
+                type="text"
+                placeholder="الجواب"
+              />{" "}
+              <br></br>
+              <select
+                onChange={(e) => {
+                  bool4(e);
+                }}
+                value={bol}
+              >
+                <option value={false}>false</option>
+                <option value={true}>true</option>
+              </select>
+              <input
+                onChange={(e) => {
+                  radio4(e);
+                }}
+                type="text"
+                placeholder="الجواب"
+              />
+              <br></br>
+              <button
+                onClick={() => {
+                  AddQuiz();
+                }}
+              >
+                {" "}
+                اضف الاختبار
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
+        </>
+      ) : (
+        ""
+      )}
+      <button
+        className="addQuiz"
+        onClick={() => {
+          addquizez();
         }}
-        type="text"
-      />
-      <input
-        onChange={(e) => {
-          radio1(e);
-        }}
-        type="radio"
-        id="s1"
-        name="quiz"
-        value={boolean}
-      />
-      <input
-        onChange={(e) => {
-          radio2(e);
-        }}
-        type="radio"
-        id="s2"
-        name="quiz"
-        value={boolean}
-      />
-      <input
-        onChange={(e) => {
-          radio3(e);
-        }}
-        type="radio"
-        id="s3"
-        name="quiz"
-        value={boolean}
-      />{" "}
-      <input
-        onChange={(e) => {
-          radio4(e);
-        }}
-        type="radio"
-        id="s4"
-        name="quiz"
-        value={boolean}
-      /> */}
+      >
+        اضف اختبار
+      </button>
+
       {quizs.map((ele, i) => {
         return (
           <div className="quiz12" key={i}>
@@ -87,6 +266,19 @@ export default function Quiz({ token }) {
 
             <ol>
               <li>
+                {user.admin == true ? (
+                  <button
+                    onClick={() => {
+                      removequiz(ele);
+                    }}
+                  >
+                    {/* {" "}
+                    ❌{" "} */}
+                  </button>
+                ) : (
+                  ""
+                )}
+
                 <input
                   onChange={(e) => {
                     radio(e, i);
@@ -148,7 +340,6 @@ export default function Quiz({ token }) {
           answer();
         }}
       >
-        {" "}
         ارسل
       </button>
     </div>

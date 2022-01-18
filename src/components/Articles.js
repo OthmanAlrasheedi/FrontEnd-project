@@ -5,6 +5,8 @@ export default function Articles({ token, admin }) {
   const [articals, setarticals] = useState([]);
   const [user, setuser] = useState([]);
   const [artical, setartical] = useState("");
+  const [togol, settogol] = useState(false);
+
 
   useEffect(async () => {
     if (token) {
@@ -53,35 +55,52 @@ export default function Articles({ token, admin }) {
     setartical(e.target.value);
   };
 
+  const addMM = () => {
+    settogol(!togol)
+  };
   return (
     <div>
+ {user.admin == true 
+ ? (<>
+  <button
+        className="butnad1"
+        onClick={() => {
+          addMM();
+        }}
+      >
+        اضف مقال
+      </button>
+      </>):""}
+      { togol === true ? (
+          <>
+      <div className="artic">
+      
+            <input
+              className="addM"
+              placeholder="اضف مقالك"
+              type="text"
+              onChange={(e) => {
+                arti(e);
+              }}
+            />
+            <button
+              className="butnad1"
+              onClick={() => {
+                addarty();
+              }}
+            >
+              اضف
+            </button>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
+   
       {articals.map((elem, i) => {
         console.log(elem);
-        return <div className="artiback">{elem.article} </div>;
+        return <div className="artiback"> <p className="pp">{elem.article}</p> </div>;
       })}
-      {user.admin == true ? (
-        <input
-          placeholder="اضف مقالك"
-          type="text"
-          onChange={(e) => {
-            arti(e);
-          }}
-        />
-      ) : (
-        ""
-      )}
-
-      {user.admin == true ? (
-        <button
-          onClick={() => {
-            addarty();
-          }}
-        >
-          اضف مقال
-        </button>
-      ) : (
-        ""
-      )}
     </div>
   );
 }
