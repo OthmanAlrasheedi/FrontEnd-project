@@ -61,17 +61,17 @@ li:hover {
   height: 400px;
 }
  */
-/* .imgesss {
-  width: 30px;
-  border-radius: 200px;
-  margin-top: -100px;
-} */
+.imgesss {
+  width: 50%;
+  width: 50%;
+  border-radius: 50%;
+}
 
 .ul {
   list-style-type: none;
   overflow: hidden;
   margin-top: 0%;
-  background-color: #03506f;
+  background-color: #03506f9e;
 }
 
 .li {
@@ -80,18 +80,20 @@ li:hover {
 
 .li a {
   display: block;
-  color: #c8c6c6;
+  color: #0f3859;
   text-align: center;
   padding: 10px 16px;
   text-decoration: none;
+  font-size: 1.1rem !important;
 }
 .liq a {
   float: left;
   display: block;
-  color: #c8c6c6;
+  color: #0f3859;
   text-align: center;
   padding: 10px 16px;
   text-decoration: none;
+  font-size: 1.1rem !important;
 }
 .li {
   display: block;
@@ -100,13 +102,65 @@ li:hover {
   text-decoration: none;
 }
 .li a:hover:not(.active) {
-  background-color: #0a043c;
+  background-color: #01e9ea;
 }
 .liq :hover:not(.active) {
-  background-color: #0a043c;
+  background-color: #01e9ea;
 }
-@media only screen and (max-width: 900px) {
-  .ul{
-    
+.log {
+  margin-left: 5px;
+  width: 88px;
+  height: 45px;
+  cursor: pointer;
+  margin-top: -3px;
+}
+@media only screen and (max-width: 600px) {
+  .ul {
+    width: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    /* flex-direction: column; */
+    margin-left: -13px;
+    font-size: 10px;
+  }
+  /* .ul {
+    list-style-type: none;
+    overflow: hidden;
+    margin-top: 0%;
+    background-color: #03506f;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  } */
+  .li a {
+    float: left;
+    display: block;
+    color: #0f3859;
+    text-align: center;
+    padding: 10px 16px;
+    text-decoration: none;
+    font-size: 0.2rem !important;
+    width: 5px;
+  }
+
+  .liq a {
+    float: left;
+    display: block;
+    color: #0f3859;
+    text-align: center;
+    padding: 10px 16px;
+    text-decoration: none;
+    font-size: 0.1rem !important;
+    width: 40px;
+  }
+  /* .li {
+     display: block;
+    text-align: center;
+    text-decoration: none;
+    margin: 10px; 
+  }  */
+  .log {
+    width: 65px;
+    height: 41px;
   }
 }

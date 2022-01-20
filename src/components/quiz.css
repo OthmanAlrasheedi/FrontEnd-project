@@ -13,7 +13,7 @@
   width: 100%;
   transition-duration: 0.4s;
   cursor: pointer;
-  background-color: rgb(238 231 231);
+  background-color: rgb(239 238 238);
   color: black;
   border: 2px solid rgb(219, 209, 209);
   box-shadow: 1px 10px 7px rgba(0, 0, 0, 0.404);
@@ -26,4 +26,76 @@
   margin: auto;
   width: 30%;
   border: 1px solid black;
+}
+.btnquiz {
+  margin: auto;
+  width: 100px;
+  margin-left: 600px;
+}
+
+.btnquiz {
+  background-color: #ffffff;
+  border: 0;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  color: #111827;
+  font-family: "Inter var", ui-sans-serif, system-ui, -apple-system, system-ui,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  text-decoration: none #d1d5db solid;
+  text-decoration-thickness: auto;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btnquiz:hover {
+  background-color: rgb(249, 250, 251);
+}
+
+.btnquiz:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.btnquiz:focus-visible {
+  box-shadow: none;
+}
+.v {
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  /* margin: -900px; */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: rgb(238 231 231);
+  color: black;
+  /* border: 2px solid rgb(219, 209, 209); */
+  box-shadow: 1px 10px 7px rgb(0 0 0 / 40%);
+  border-radius: 20px solid;
+  margin-left: 459px;
+  margin-top: 30px;
+  width: 174px;
+  margin: 19px;
+  margin-left: 580px;
+}
+@media only screen and (max-width: 900px) {
+  .v {
+    margin-left: 104px;
+  }
+  .addQuiz {
+    margin: 28px;
+    width: 241px;
+    padding: 10px;
+    margin-left: 46px;
+  }
 }

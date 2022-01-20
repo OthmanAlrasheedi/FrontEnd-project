@@ -12,9 +12,12 @@ export default function List({ token, username }) {
 
   useEffect(async () => {
     if (token) {
-      const res = await axios.get(`http://localhost:5000/gettaslk`, {
-        headers: { authorization: "Bearer " + token },
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/gettaslk`,
+        {
+          headers: { authorization: "Bearer " + token },
+        }
+      );
       setList(res.data);
       setcounter(res.data.length);
     }
@@ -22,7 +25,7 @@ export default function List({ token, username }) {
     console.log(token);
 
     if (token) {
-      const res = await axios.get("http://localhost:5000/user", {
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user`, {
         headers: { authorization: "Bearer " + token },
       });
       setuser(res.data);
@@ -40,7 +43,7 @@ export default function List({ token, username }) {
   const addCours = async () => {
     try {
       const res = await axios.post(
-        `http://localhost:5000/addtaslk`,
+        `${process.env.REACT_APP_BACKEND_URL}/addtaslk`,
         {
           name: Addname,
           Description: Addisc,
@@ -64,7 +67,7 @@ export default function List({ token, username }) {
     if (token) {
       try {
         const res = await axios.delete(
-          `http://localhost:5000/deletetask/${id}`,
+          `${process.env.REACT_APP_BACKEND_URL}/deletetask/${id}`,
           {
             headers: { authorization: "Bearer " + token },
           }
@@ -92,6 +95,7 @@ export default function List({ token, username }) {
           type="text"
           placeholder=" ااسم الماده"
         />
+        <br></br>
         <input
           onChange={(e) => {
             Adddis(e);
@@ -100,8 +104,9 @@ export default function List({ token, username }) {
           className="discr"
           placeholder="الملاحظه"
         />
+        <br></br>
         <button
-          className=""
+          className="btnlist"
           onClick={() => {
             addCours();
           }}

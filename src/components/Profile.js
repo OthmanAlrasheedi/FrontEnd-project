@@ -29,13 +29,14 @@ export default function Profile({ token }) {
   };
 
   useEffect(async () => {
-    const res = await axios.get("http://localhost:5000/user", {
+    const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user`, {
       headers: { authorization: "Bearer " + token },
     });
     setuser(res.data);
     setname(res.data.name);
     setimg(res.data.img);
     setpass(res.data.password);
+    setbio(res.data.bio);
     console.log(res.data);
   }, []);
   const cahngename = (e) => {
@@ -54,7 +55,7 @@ export default function Profile({ token }) {
   const update = async () => {
     if (token) {
       const result = await axios.put(
-        "http://localhost:5000/updateuser",
+        `${process.env.REACT_APP_BACKEND_URL}/updateuser`,
         {
           name: name,
           img: img,
@@ -73,7 +74,7 @@ export default function Profile({ token }) {
   const deletacount = async () => {
     try {
       const deletedCourse = await axios.delete(
-        "http://localhost:5000/deleteuser",
+        `${process.env.REACT_APP_BACKEND_URL}/deleteuser`,
         {
           headers: { authorization: "Bearer " + token },
         }
@@ -91,6 +92,7 @@ export default function Profile({ token }) {
   const alldata = (
     <div className="alldat">
       <input
+        value={bio}
         onChange={(e) => {
           cahngebio(e);
         }}
@@ -161,7 +163,7 @@ export default function Profile({ token }) {
           }}
         >
           {" "}
-          حذف الحساب
+          ❌{" "}
         </button>
         <button
           className="update"

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./quiz.css";
+import { useIsRTL } from "react-bootstrap/esm/ThemeProvider";
 // http رقوست axsios
 export default function Quiz({ token, admin }) {
   const [quizs, setquizs] = useState([]);
@@ -17,7 +18,7 @@ export default function Quiz({ token, admin }) {
   const [bol3, setbol3] = useState(false);
   const [user, setuser] = useState([]);
   const [qiz, setquiz] = useState("");
-  const [massege, setmassege] = useState("");
+  const [massege, setmassege] = useState(false);
   const [toogel, settoogel] = useState(false);
 
   const { id } = useParams();
@@ -25,16 +26,19 @@ export default function Quiz({ token, admin }) {
   useEffect(async () => {
     try {
       if (token) {
-        const res = await axios.get(`http://localhost:5000/gettset/${id}`, {
-          headers: { authorization: "Bearer " + token },
-        });
+        const res = await axios.get(
+          `https://minasat-satr.herokuapp.com/gettset/${id}`,
+          {
+            headers: { authorization: "Bearer " + token },
+          }
+        );
         setquizs(res.data.quiz);
       }
     } catch (error) {
       console.log(error);
     }
     if (token) {
-      const res = await axios.get("http://localhost:5000/user", {
+      const res = await axios.get("https://minasat-satr.herokuapp.com/user", {
         headers: { authorization: "Bearer " + token },
       });
       setuser(res.data);
@@ -63,6 +67,8 @@ export default function Quiz({ token, admin }) {
 
     setquis(count);
     setmassege(count);
+    setmassege(!massege);
+    window.scrollTo(0, 0);
   };
 
   const quiz = (e) => {
@@ -102,7 +108,7 @@ export default function Quiz({ token, admin }) {
     console.log(body);
     try {
       const result = await axios.put(
-        `http://localhost:5000/deltset/${id}`,
+        `https://minasat-satr.herokuapp.com/deltset/${id}`,
         {
           quiz: body,
         },
@@ -122,7 +128,7 @@ export default function Quiz({ token, admin }) {
       console.log(token);
       try {
         const result = await axios.post(
-          `http://localhost:5000/addtset/${id}`,
+          `https://minasat-satr.herokuapp.com/addtset/${id}`,
           {
             quiz: {
               q: { Q: qiz },
@@ -147,12 +153,13 @@ export default function Quiz({ token, admin }) {
   const addquizez = () => {
     settoogel(!toogel);
   };
+  const replayquiz = () => {
+    window.location.reload();
+  };
   return (
     <div>
       {user.userId == true ? "" : ""}
-      <h1>
-        حصلت على {quis} من {quizs.length}
-      </h1>
+
       {toogel === true ? (
         <>
           {" "}
@@ -235,6 +242,7 @@ export default function Quiz({ token, admin }) {
               />
               <br></br>
               <button
+                className="vv"
                 onClick={() => {
                   AddQuiz();
                 }}
@@ -250,15 +258,37 @@ export default function Quiz({ token, admin }) {
       ) : (
         ""
       )}
-      <button
-        className="addQuiz"
-        onClick={() => {
-          addquizez();
-        }}
-      >
-        اضف اختبار
-      </button>
+      {user.admin == true ? (
+        <button
+          className="v"
+          onClick={() => {
+            addquizez();
+          }}
+        >
+          اضف اختبار
+        </button>
+      ) : (
+        ""
+      )}
 
+      {massege == true ? (
+        <div>
+          <h1>
+            حصلت على {quis} من {quizs.length}
+          </h1>
+
+          <button
+            className="vv"
+            onClick={() => {
+              replayquiz();
+            }}
+          >
+            اعد الاختبار
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
       {quizs.map((ele, i) => {
         return (
           <div className="quiz12" key={i}>
@@ -266,18 +296,15 @@ export default function Quiz({ token, admin }) {
 
             <ol>
               <li>
-                {user.admin == true ? (
+                {/* {user.admin == true ? (
                   <button
                     onClick={() => {
                       removequiz(ele);
                     }}
-                  >
-                    {/* {" "}
-                    ❌{" "} */}
-                  </button>
+                  ></button>
                 ) : (
                   ""
-                )}
+                )} */}
 
                 <input
                   onChange={(e) => {
@@ -336,11 +363,12 @@ export default function Quiz({ token, admin }) {
         );
       })}
       <button
+        className="v"
         onClick={() => {
           answer();
         }}
       >
-        ارسل
+        اجب
       </button>
     </div>
   );

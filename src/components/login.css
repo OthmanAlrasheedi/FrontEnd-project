@@ -22,18 +22,17 @@ h1 {
   height: 30px;
   width: 80%;
   border-radius: 10px;
-  background-color: #243e40;
+  background-color: FDFAF6;
   font-family: inherit;
   font-size: 100%;
   line-height: 1.15;
-  margin: 0;
+  margin: 10px;
 }
 
 .inputsign {
   height: 30px;
   width: 80%;
   border-radius: 10px;
-  color: #00adbb;
 }
 
 .tosign {
@@ -82,4 +81,40 @@ but:hover {
 .tosignup {
   margin: 20px;
   border-radius: 20px solid rgb(59, 16, 158);
+}
+
+@media only screen and (max-width: 900px) {
+  .signup {
+    border: 2px white;
+    width: 400px;
+    height: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    gap: 10px;
+    margin: 150px auto;
+  }
+  h1 {
+    text-align: center;
+  }
+  .but {
+    height: 30px;
+    width: 80%;
+    border-radius: 10px;
+    background-color: FDFAF6;
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 10px;
+  }
+
+  .inputsign {
+    height: 30px;
+    width: 80%;
+    border-radius: 10px;
+  }
+
+  .tosign {
+    text-decoration: none;
+  }
 }

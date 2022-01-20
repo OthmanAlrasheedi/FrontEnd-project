@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   background-image: url("");
-  
 }
 
 .courses {
@@ -40,9 +39,8 @@
 }
 .namecoures {
   background-color: #03506f;
-    text-align: center;
-    color: white;
-
+  text-align: center;
+  color: white;
 }
 
 .butremove {
@@ -62,12 +60,25 @@
   text-align: center;
 }
 .inputSea {
-  color: black;
+  /* color: black;
   border-radius: 5px solid black;
   margin: auto;
   width: 250px;
-  height: 30px;
+  height: 30px; */
+  margin-left: -80px;
+  width: 261px;
+  border-radius: 5px solid black;
+  font-size: 16px;
+  font-family: DINNextLTArabic, Cairo, sans-serif !important;
+  padding: 15px 45px 15px 15px;
+  background-color: #6393a666;
+  color: #153f5e;
+  border: none;
+  transition: all 0.4s;
+  opacity: 0.5;
+  border-radius: 8px;
 }
+
 .search {
   border-radius: 3px solid black;
   width: 34px;
@@ -93,17 +104,23 @@
 .abdaaldrs {
   text-align: center;
 }
+.favi {
+  position: relative;
+}
 @media only screen and (max-width: 900px) {
-  .courses{
-      width: 1217px;
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: column; 
-      margin: 6px;
-
+  .courses {
+    width: 1217px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 6px;
   }
-  .inputSea{
+  .inputSea {
     margin-left: -76px;
     width: 146px;
-}
+  }
+  .h3 {
+    text-align: center;
+    margin: 10px;
+  }
 }

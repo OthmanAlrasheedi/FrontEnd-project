@@ -15,7 +15,7 @@
 }
 
 .namecoures {
-  background-color: rgb(94 137 146);
+  background-color: rgb(83 160 176);
   text-align: center;
 }
 .imgfav {
@@ -31,4 +31,19 @@
 }
 .likes {
   color: red;
+  position: relative;
+}
+
+@media only screen and (max-width: 900px) {
+  .fav {
+    width: 1217px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 6px;
+  }
+  /* .inputSea{
+    margin-left: -76px;
+    width: 146px;
+} */
 }

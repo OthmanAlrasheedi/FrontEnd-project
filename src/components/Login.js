@@ -18,19 +18,29 @@ export default function Login({ setToken, setadmin, setusername, setuserId }) {
 
   const checkLogin = async () => {
     try {
-      // if (email !== email.value || password !== password.value) {
-      //   alert("الرجاء ادخل الرمز او الايميل بشكل صحيح");
-      // } else {
-      const response = await axios.post("http://localhost:5000/login", {
-        email: email,
-        password: password,
-      });
-      setToken(response.data.token);
-      setadmin(response.data.payload.admin);
-      setusername(response.data.payload.userName);
-      setuserId(response.data.payload.userId);
-      console.log(setToken);
-      history.push("/Courses");
+      if (email == "" || password == "") {
+        alert("الرجاء ادخل الرمز او الايميل بشكل صحيح");
+      } else {
+        const response = await axios.post(
+          `${process.env.REACT_APP_BACKEND_URL}/login`,
+          {
+            email: email,
+            password: password,
+          }
+        );
+
+        setToken(response.data.token);
+        setadmin(response.data.payload.admin);
+        setusername(response.data.payload.userName);
+        setuserId(response.data.payload.userId);
+        // localStorage.setItem(
+        //   "username",
+        //   JSON.stringify(response.data.payload.userName)
+        // );
+
+        console.log(setToken);
+        history.push("/Courses");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -41,11 +51,12 @@ export default function Login({ setToken, setadmin, setusername, setuserId }) {
   return (
     <div>
       <div className="signup">
-        <h1>تسجيل الدخول</h1>
+        <h3>تسجيل الدخول</h3>
         <p>
           {" "}
           <br />{" "}
           <input
+            type="email"
             className="inputsign"
             onChange={(e) => {
               changeEmail(e);
@@ -65,6 +76,15 @@ export default function Login({ setToken, setadmin, setusername, setuserId }) {
             placeholder=" الرمز"
           />
         </p>{" "}
+        <button
+          className="but"
+          onClick={() => {
+            checkLogin();
+          }}
+        >
+          دخول
+        </button>
+        <br></br>
         <Link
           className="tosign"
           to="/signUp"
@@ -74,14 +94,6 @@ export default function Login({ setToken, setadmin, setusername, setuserId }) {
         >
           للتسجيل اضغط هنا
         </Link>
-        <button
-          className="but"
-          onClick={() => {
-            checkLogin();
-          }}
-        >
-          دخول
-        </button>
       </div>
     </div>
   );

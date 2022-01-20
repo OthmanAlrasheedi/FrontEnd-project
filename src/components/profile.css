@@ -7,13 +7,13 @@
   justify-content: center;
   align-items: center;
   width: 400px;
-  height: 400px;
+  height: 502px;
   position: absolute;
   border: 1px solid black;
   border-radius: 40px;
   padding: 10px;
   background-color: rgb(209 224 224 / 15%);
-  box-shadow: 1px 10px 7px rgba(0, 0, 0, 0.404);
+  box-shadow: 1px 10px 7px rgb(0 0 0 / 40%);
 }
 
 .inupdate {
@@ -24,14 +24,115 @@
   align-items: center;
   width: 100px;
 }
-.delacount {
+/* .delacount {
   width: 100px;
   background-color: rgb(245, 6, 6);
-}
+} */
 .imgess {
   border: 1px solid #03bfcb;
   border-radius: 120px;
   padding: 7px;
   width: 150px;
   background-color: aliceblue;
+}
+
+.update {
+  background-color: #ffffff;
+  border: 1px solid #222222;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #222222;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+    "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  padding: 13px 23px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: box-shadow 0.2s, -ms-transform 0.1s, -webkit-transform 0.1s,
+    transform 0.1s;
+  user-select: none;
+  -webkit-user-select: none;
+  width: auto;
+}
+
+.update-23:focus-visible {
+  box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
+  transition: box-shadow 0.2s;
+}
+
+.update:active {
+  background-color: #f7f7f7;
+  border-color: #000000;
+  transform: scale(0.96);
+}
+
+.update:disabled {
+  border-color: #dddddd;
+  color: #dddddd;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+@media only screen and (max-width: 900px) {
+  .profile {
+    margin: 0;
+    margin-top: 5%;
+    margin-right: 0;
+    margin-left: 0;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 356px;
+    height: 534px;
+    position: absolute;
+    border: 1px solid black;
+    border-radius: 40px;
+    padding: 10px;
+    background-color: rgb(209 224 224 / 15%);
+    box-shadow: 1px 10px 7px rgb(0 0 0 / 40%);
+  }
+}
+
+.delacount {
+  background: #ff4742;
+  border: 1px solid #ff4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.delacount:hover,
+.delacount:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #ff4742;
+}
+
+.button-24:active {
+  opacity: 0.5;
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+
 import axios from "axios";
 import "./sigup.css";
 
@@ -7,6 +8,7 @@ export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [massege, setmassege] = useState("");
   // you can use variable instded of state in this  case
   const history = useHistory();
   const changeName = (e) => {
@@ -20,15 +22,18 @@ export default function SignUp() {
   };
 
   const addUser = async () => {
-    if (name !== name.value || email !== email || password !== password.value) {
+    if (name == "" || email == "" || password == "") {
       alert("الرجاء  اكمل التسجيل بشكل صحيح !");
     } else {
       try {
-        const response = await axios.post("http://localhost:5000/signup", {
-          name: name,
-          email: email,
-          password: password,
-        });
+        const response = await axios.post(
+          "https://minasat-satr.herokuapp.com/signup",
+          {
+            name: name,
+            email: email,
+            password: password,
+          }
+        );
         console.log(response);
         if (response.status === 201) {
           history.push("/login");
@@ -37,6 +42,9 @@ export default function SignUp() {
         console.log("err");
       }
     }
+  };
+  const toLogin = () => {
+    history.push("login");
   };
   return (
     <div className="Signup">
@@ -50,6 +58,7 @@ export default function SignUp() {
       />
       <br></br>
       <input
+        type="email"
         className="csssignup"
         onChange={(e) => {
           changeEmail(e);
@@ -74,6 +83,17 @@ export default function SignUp() {
       >
         تسجيل
       </button>
+
+      <br></br>
+      <Link
+        className="tosign"
+        to="/login"
+        onClick={() => {
+          toLogin();
+        }}
+      >
+        للدخول اضغط هنا{" "}
+      </Link>
     </div>
   );
 }

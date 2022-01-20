@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BsFillHeartFill } from "react-icons/bs";
+import { AiFillHeart } from "react-icons/ai";
 import { useHistory, useParams } from "react-router-dom";
 import "./courses.css";
 import axios from "axios";
@@ -16,23 +16,27 @@ export default function Courses({ token, admin }) {
   const [search, setsearch] = useState("");
 
   useEffect(async () => {
-    const res = await axios.get("http://localhost:5000/getCoures", {
-      headers: { authorization: "Bearer " + token },
-    });
+    const res = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/getCoures`,
+      {
+        headers: { authorization: "Bearer " + token },
+      }
+    );
     console.log(res.data, "courses");
     setCourses(res.data);
 
     if (token) {
-      const res = await axios.get("http://localhost:5000/user", {
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user`, {
         headers: { authorization: "Bearer " + token },
       });
       setuser(res.data);
     }
   }, [token]);
+  //minasat-satr.herokuapp.com
 
-  useEffect(async () => {
+  https: useEffect(async () => {
     if (token) {
-      const res = await axios.get("http://localhost:5000/like", {
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/like`, {
         headers: { authorization: "Bearer " + token },
       });
       setlike(res.data);
@@ -72,7 +76,7 @@ export default function Courses({ token, admin }) {
   const deleteCoures = async (id, i) => {
     try {
       const deletedCourse = await axios.delete(
-        `http://localhost:5000/deletcures/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/deletcures/${id}`,
         {
           headers: { authorization: "Bearer " + token },
         }
@@ -94,7 +98,7 @@ export default function Courses({ token, admin }) {
   const fav = async (id) => {
     try {
       const result = await axios.post(
-        `http://localhost:5000/like/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/like/${id}`,
         {},
         {
           headers: { authorization: "Bearer " + token },
@@ -107,9 +111,12 @@ export default function Courses({ token, admin }) {
     }
   };
   const removeLike = async (id) => {
-    const result = await axios.delete(`http://localhost:5000/unlike/${id}`, {
-      headers: { authorization: "Bearer " + token },
-    });
+    const result = await axios.delete(
+      `${process.env.REACT_APP_BACKEND_URL}/unlike/${id}`,
+      {
+        headers: { authorization: "Bearer " + token },
+      }
+    );
     // setlike(result.data);
     setInfon(!infon);
     console.log(result.data);
@@ -162,7 +169,8 @@ export default function Courses({ token, admin }) {
                     />
                     <p className="discrptionCoures"> {element.Description}</p>
                     <br></br>
-                    <BsFillHeartFill
+                    <AiFillHeart
+                      className="favi"
                       style={{ color: "red" }}
                       onClick={() => {
                         removeLike(element._id);
@@ -198,7 +206,7 @@ export default function Courses({ token, admin }) {
                 ) : (
                   ""
                 )}
-                <BsFillHeartFill
+                <AiFillHeart
                   style={{ color: "gray" }}
                   onClick={() => {
                     fav(element._id);

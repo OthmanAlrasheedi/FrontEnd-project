@@ -25,7 +25,7 @@ export default function OneCouers({ token, admin }) {
     // هنا جبنا البيانات من السيرفر
     try {
       if (token) {
-        const res = await axios.get(`http://localhost:5000/getCoures/${id}`, {
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getCoures/${id}`, {
           headers: { authorization: "Bearer " + token },
         });
         setallcouers(res.data);
@@ -38,7 +38,7 @@ export default function OneCouers({ token, admin }) {
       console.log(error);
     }
     if (token) {
-      const res = await axios.get("http://localhost:5000/user", {
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user`, {
         headers: { authorization: "Bearer " + token },
       });
       setuser(res.data);
@@ -49,7 +49,7 @@ export default function OneCouers({ token, admin }) {
   useEffect(async () => {
     try {
       if (token) {
-        const res = await axios.get(`http://localhost:5000/addcomment`, {
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/addcomment`, {
           headers: { authorization: "Bearer " + token },
         });
         // setallcouers(res.data);
@@ -70,7 +70,7 @@ export default function OneCouers({ token, admin }) {
       console.log(dis, img);
       try {
         const result = await axios.put(
-          `http://localhost:5000/putCoures/${id}`,
+          `${process.env.REACT_APP_BACKEND_URL}/putCoures/${id}`,
           {
             Description: dis,
             img: img,
@@ -89,7 +89,7 @@ export default function OneCouers({ token, admin }) {
   const addVedio = async (id) => {
     try {
       const result = await axios.post(
-        `http://localhost:5000/AddVedio/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/AddVedio/${id}`,
         {
           vedio: vedio,
         },
@@ -109,7 +109,7 @@ export default function OneCouers({ token, admin }) {
     try {
       console.log("hii");
       const result = await axios.delete(
-        `http://localhost:5000/delVedio/${id}/${ele}`,
+        `${process.env.REACT_APP_BACKEND_URL}/delVedio/${id}/${ele}`,
         {
           headers: { authorization: "Bearer " + token },
         }
@@ -132,7 +132,7 @@ export default function OneCouers({ token, admin }) {
   const delcomm = async (comment) => {
     try {
       const res = await axios.put(
-        `http://localhost:5000/delcommen/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/delcommen/${id}`,
         {
           comment: comment,
         },
@@ -151,7 +151,7 @@ export default function OneCouers({ token, admin }) {
   const Addcomm = async () => {
     try {
       const addcom = await axios.post(
-        `http://localhost:5000/addcomment/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/addcomment/${id}`,
         {
           comment: comm,
         },
@@ -226,6 +226,7 @@ export default function OneCouers({ token, admin }) {
             {" "}
             {user.admin == true ? (
               <input
+                className="vdinput"
                 type="text"
                 placeholder="الفيديو"
                 onChange={(e) => {
@@ -235,8 +236,10 @@ export default function OneCouers({ token, admin }) {
             ) : (
               ""
             )}
+            <br />
             {user.admin == true ? (
               <button
+                className="videe"
                 onClick={() => {
                   addVedio(id);
                 }}
@@ -249,6 +252,7 @@ export default function OneCouers({ token, admin }) {
             )}
             {user.admin == true ? (
               <button
+                className="videe"
                 onClick={() => {
                   updat();
                 }}
@@ -302,7 +306,7 @@ export default function OneCouers({ token, admin }) {
                 );
               })}
               <button
-                className="quiz"
+                className="videe"
                 onClick={() => {
                   gotoquiz(id);
                 }}
@@ -310,10 +314,19 @@ export default function OneCouers({ token, admin }) {
                 {" "}
                 اختبر نفسك
               </button>
+              <button
+                className="videe"
+                onClick={() => {
+                  addinlist();
+                }}
+              >
+                دون ملاحظاتك
+              </button>
             </div>
           </div>
           <div className="frame">
             <iframe
+              id="vedio1"
               className="mx-auto frame"
               width="850"
               height="600"
@@ -324,14 +337,6 @@ export default function OneCouers({ token, admin }) {
               allowfullscreen
               className="video"
             ></iframe>
-            <button
-              className="addinlist"
-              onClick={() => {
-                addinlist();
-              }}
-            >
-              دون ملاحظاتك
-            </button>
 
             <br></br>
           </div>

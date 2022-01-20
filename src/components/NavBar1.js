@@ -16,7 +16,7 @@ export default function NavBar1({
   const [img, setimg] = useState("");
 
   useEffect(async () => {
-    const res = await axios.get("http://localhost:5000/user", {
+    const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user`, {
       headers: { authorization: "Bearer " + token },
     });
     setuser(res.data);
@@ -28,6 +28,13 @@ export default function NavBar1({
       {token ? (
         <ul className="ul">
           {/* <div className="navbarright"> */}
+
+          <li className="li">
+            <img
+              className="log"
+              src="https://satr.codes/assets/images/logo.png"
+            />
+          </li>
 
           <li className="li">
             <Link to="/Courses">الدروس</Link>
@@ -49,12 +56,13 @@ export default function NavBar1({
           {/* <div className="navbarleft"> */}
 
           <li className="liq">
-            <Link to="/Courses">{username} مرحبا</Link>
+            {/* <Link to="/Courses">{username} مرحبا</Link> */}
           </li>
           <li className="liq">
             <Link to="/Profile">
               {" "}
-              <img className="imgesss" src={img.img} />
+              الملف الشخصي
+              {/* <img className="imgesss" src={img.img} /> */}
             </Link>
           </li>
           <li className="liq">

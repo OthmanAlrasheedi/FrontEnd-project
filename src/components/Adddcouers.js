@@ -40,23 +40,27 @@ export default function Addcouers({ token, admin }) {
 
   const Addcouers = async () => {
     try {
-      const result = await axios.post(
-        "http://localhost:5000/addCoures",
-        {
-          name: name,
-          Description: Description,
-          img: img,
-        },
+      if (name == "" || Description == "" || img == "") {
+        alert("الرجاء ادخال جميع بيانات الماده التي تريد ان تضيفها");
+      } else {
+        const result = await axios.post(
+          `${process.env.REACT_APP_BACKEND_URL}/addCoures`,
+          {
+            name: name,
+            Description: Description,
+            img: img,
+          },
 
-        {
-          headers: { authorization: "Bearer " + token },
-        }
-      );
-      console.log(result.data);
-      // setCourses([...Courses, result.data]);
-      const copied = [...add];
-      copied.push(result.data);
-      setadd(copied);
+          {
+            headers: { authorization: "Bearer " + token },
+          }
+        );
+        console.log(result.data);
+        // setCourses([...Courses, result.data]);
+        const copied = [...add];
+        copied.push(result.data);
+        setadd(copied);
+      }
     } catch (error) {
       console.log(error);
     }

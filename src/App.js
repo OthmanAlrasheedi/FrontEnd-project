@@ -11,11 +11,14 @@ import OneCouers from "./components/OneCouers";
 import Addcouers from "./components/Adddcouers";
 import Quiz from "./components/Quiz";
 import { Route } from "react-router";
-
+require("dotenv").config();
 function App() {
+  //
+
   const [admin, setadmin] = useState(false);
   const [userId, setuserId] = useState(false);
   const [username, setusername] = useState("");
+
   const [token, setToken] = useState(() => {
     const saved = localStorage.getItem("token");
     const saved11 = localStorage.getItem("username");
@@ -28,6 +31,8 @@ function App() {
     localStorage.setItem("token", JSON.stringify(token));
     localStorage.setItem("username", JSON.stringify(username));
   }, [token]);
+
+  console.log(process.env.REACT_APP_BACKEND_URL, "backend url");
   return (
     <div>
       <NavBar1
