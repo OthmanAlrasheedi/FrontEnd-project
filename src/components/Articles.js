@@ -21,7 +21,7 @@ export default function Articles({ token, admin }) {
       }
     }
     if (token) {
-      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user`, {
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}np/user`, {
         headers: { authorization: "Bearer " + token },
       });
       setuser(res.data);
